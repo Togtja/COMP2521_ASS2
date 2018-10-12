@@ -8,7 +8,7 @@
 #include "queue.h"
 
 typedef struct QueueNode {
-	Item value;
+	char * value;
 	struct QueueNode *next;
 } QueueNode;
 
@@ -52,7 +52,7 @@ void showQueue(Queue Q)
 	// free list nodes
 	curr = Q->head;
 	while (curr != NULL) {
-		showItem(curr->value);
+		printf("%s\n",(curr->value));
 		if (curr->next != NULL)
 			printf(" > ");
 		curr = curr->next;
@@ -62,7 +62,7 @@ void showQueue(Queue Q)
 }
 
 // add item at end of Queue
-void QueueJoin(Queue Q, Item it)
+void QueueJoin(Queue Q, char* it)
 {
 	assert(Q != NULL);
 	QueueNode *new = malloc(sizeof(QueueNode));
@@ -77,11 +77,11 @@ void QueueJoin(Queue Q, Item it)
 }
 
 // remove item from front of Queue
-Item QueueLeave(Queue Q)
+char* QueueLeave(Queue Q)
 {
 	assert(Q != NULL);
 	assert(Q->head != NULL);
-	Item it = Q->head->value;
+	char * it = Q->head->value;
 	QueueNode *old = Q->head;
 	Q->head = old->next;
 	if (Q->head == NULL) Q->tail = NULL;

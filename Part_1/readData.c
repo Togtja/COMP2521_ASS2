@@ -2,6 +2,7 @@
 #include <stdio.h>
 #include <string.h>
 #include "readData.h"
+#include "queue.h"
 
 void listOfUrls(char file[]){
 	//Find the file
