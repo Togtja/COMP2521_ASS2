@@ -4,7 +4,7 @@
 #include "readData.h"
 #include "queue.h"
 
-void listOfUrls(char file[]){
+Queue listOfUrls(char file[]){
 	//Find the file
     char * filename = malloc(strlen(file) + strlen(".txt") + 1);
     strcpy(filename, file);
@@ -12,26 +12,36 @@ void listOfUrls(char file[]){
     FILE *fp = fopen(filename, "r");
     if (fp == NULL) {
         fprintf(stderr, "error: file collection.txt can not open\n");
-        return;
+        //return 0;
     }
 
-    char *str;
+    char str[10];
 
-
+    Queue q = newQueue();
     while(fscanf(fp, "%s", str) != EOF) {
         printf("%s\n", str);
+        QueueJoin(q, str);
     }
 
     fclose(fp);
     free(filename);
-
+    return q;
 	//Make a list (Queue/Stack) of the URLS
 	//Return the URL list
 }
 
 int main() {
 
-    listOfUrls("collection");
+    
+    Queue q = listOfUrls("collection");
+    printf("Start showing showQueue()\n");
+    showQueue(q);
+    printf("Start showing own function\n");
+    while (!QueueIsEmpty(q)) {
+    	char* str = QueueLeave(q);
+    	printf("%s\n", str);
+    }
+
     return 0;
 
 }
