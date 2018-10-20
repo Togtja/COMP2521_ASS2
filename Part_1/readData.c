@@ -4,7 +4,38 @@
 #include "readData.h"
 #include "queue.h"
 
-Queue listOfUrls(char file[]){
+struct node {
+    char * url;
+    struct node *next;
+};
+
+struct node *head = NULL;
+struct node *curr = NULL;
+
+void printList() {
+
+    struct node *ptr = head;
+    while (ptr != NULL) {
+        printf("%s\n", ptr->url);
+        ptr = ptr->next;
+    }
+}
+
+void insert(char str[]) {
+    struct node *link = malloc(sizeof(struct node));
+    link->url = malloc(strlen(str) * sizeof(char) + 1);
+    strcpy(link->url, str);
+    link->next = NULL;
+    if (head == NULL) {
+        head = link;
+        curr = head;
+    } else {
+        curr->next = link;
+        curr = curr->next;
+    }
+}
+
+void listOfUrls(char file[]){
 	//Find the file
     char * filename = malloc(strlen(file) + strlen(".txt") + 1);
     strcpy(filename, file);
@@ -17,30 +48,32 @@ Queue listOfUrls(char file[]){
 
     char str[10];
 
-    Queue q = newQueue();
+    //Queue q = newQueue();
     while(fscanf(fp, "%s", str) != EOF) {
-        printf("%s\n", str);
-        QueueJoin(q, str);
+        //printf("hey %s\n", str);
+        insert(str);
+      //  QueueJoin(q, str);
     }
 
     fclose(fp);
     free(filename);
-    return q;
+    //return q;
 	//Make a list (Queue/Stack) of the URLS
 	//Return the URL list
 }
 
 int main() {
 
-    
-    Queue q = listOfUrls("collection");
-    printf("Start showing showQueue()\n");
-    showQueue(q);
-    printf("Start showing own function\n");
-    while (!QueueIsEmpty(q)) {
-    	char* str = QueueLeave(q);
-    	printf("%s\n", str);
-    }
+
+    listOfUrls("collection");
+    printList();
+    //printf("Start showing showQueue()\n");
+    //showQueue(q);
+    //printf("Start showing own function\n");
+    //while (!QueueIsEmpty(q)) {
+    //	char* str = QueueLeave(q);
+    //	printf("%s\n", str);
+    //}
 
     return 0;
 
