@@ -7,22 +7,6 @@
 
 
 
-struct node {
-    char * url;
-    struct node *next;
-};
-
-struct List {
-
-    struct node *head;
-    struct node *curr;
-    int size;
-
-};
-
-typedef struct List *List;
-
-void graphBuilder(List urls, Graph g);
 
 List newList() {
     List list = malloc(sizeof(struct List));
@@ -41,7 +25,7 @@ void printList(List L) {
     }
 }
 
-void insert(char str[], List L) {
+void insertList(char str[], List L) {
     struct node *link = malloc(sizeof(struct node));
     link->url = malloc(strlen(str) * sizeof(char) + 1);
     strcpy(link->url, str);
@@ -73,7 +57,7 @@ void listOfUrls(char file[], List l){
     //Queue q = newQueue();
     while(fscanf(fp, "%s", str) != EOF) {
         //printf("hey %s\n", str);
-        insert(str,l);
+        insertList(str,l);
       //  QueueJoin(q, str);
     }
 
@@ -84,28 +68,7 @@ void listOfUrls(char file[], List l){
 	//Return the URL list
 }
 
-int main() {
 
-
-    List l = newList();
-    listOfUrls("collection", l);
-    printList(l);
-    printf("%d\n", l->size);
-
-    Graph urlConnections = newGraph(l->size);
-    graphBuilder(l, urlConnections);
-    showGraph(urlConnections, 1);
-    //printf("Start showing showQueue()\n");
-    //showQueue(q);
-    //printf("Start showing own function\n");
-    //while (!QueueIsEmpty(q)) {
-    //	char* str = QueueLeave(q);
-    //	printf("%s\n", str);
-    //}
-
-    return 0;
-
-}
 
 void graphBuilder(List urls, Graph g) {
 	//Create an empty list
