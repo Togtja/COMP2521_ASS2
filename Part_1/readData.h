@@ -9,6 +9,7 @@ struct node {
     int pos;
     int in;
     int out;
+	float val;
 };
 
 struct List {
@@ -19,21 +20,6 @@ struct List {
 
 };
 
-struct PRNode {
-
-    double val;
-    struct PRNode *next;
-
-};
-
-struct PRList {
-
-    struct PRNode *head;
-    int size;
-
-};
-
-typedef struct PRList *PRList;
 typedef struct List *List;
 
 void graphBuilder(List urls, Graph g);
@@ -45,5 +31,7 @@ void printList(List L);
 void insertList(char str[], List L);
 
 void listOfUrls(char file[], List l);
+//Initialized the pagerank list
+void initPR(List l);
 
 #endif

@@ -19,7 +19,7 @@ void printList(List L) {
 
     struct node *ptr = L->head;
     while (ptr != NULL) {
-        printf("%s: weight: %d ins: %d outs: %d\n", ptr->url, ptr->pos, ptr->in, ptr->out);
+        printf("%s: weight: %d ins: %d outs: %d value: %.7f\n", ptr->url, ptr->pos, ptr->in, ptr->out, ptr->val);
         ptr = ptr->next;
     }
 }
@@ -35,12 +35,14 @@ void insertList(char str[], List L) {
         L->head->pos = 1;
         L->head->in = 0;
         L->head->out = 0;
+		L->head->val = 0;
     } else {
         L->curr->next = link;
         L->curr = L->curr->next;
         L->curr->pos = L->size + 1;
         L->curr->in = 0;
         L->curr->out = 0;
+		L->curr->val = 0;
     }
 
     L->size++;
@@ -130,3 +132,11 @@ void graphBuilder(List urls, Graph g) {
 //List getInvertedList(List urls) {
 	//Don't understand what this one is suppsed to do
 //}
+void initPR(List l) {
+	l->curr = l->head;
+	while (l->curr != NULL) {
+		l->curr->val = 1.f/ (float)l->size;
+
+		l->curr = l->curr->next;
+	}
+}
