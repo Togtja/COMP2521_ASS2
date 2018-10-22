@@ -7,7 +7,6 @@
 
 
 
-
 List newList() {
     List list = malloc(sizeof(struct List));
     list->head = NULL;

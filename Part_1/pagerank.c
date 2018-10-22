@@ -6,6 +6,7 @@
 #include "graph.h"
 #include "pagerank.h"
 
+
 //`void pageRanker(double d, double diffPR, double maxIterations, List urls, Graph g) {
 
 
@@ -77,6 +78,10 @@ int main(int argc, char *argv[]) {
 
 
     printList(url_list);
+
+	char c = getchar();
+	
+
     //attempt PR lmao
     //int i = 0;
     //double diff = diffPR;

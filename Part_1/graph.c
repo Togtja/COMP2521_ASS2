@@ -160,6 +160,6 @@ int vertexID(char *str, char **names, int N)
 // - add Str at end of Names
 int addVertex(char *str, char **names, int N)
 {
-	names[N] = strdup(str);
+	names[N] = _strdup(str);
 	return N;
 }
