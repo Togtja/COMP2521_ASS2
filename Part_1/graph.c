@@ -8,7 +8,7 @@
 #include "graph.h"
 
 #define strEQ(g,t) (strcmp((g),(t)) == 0)
-#define strdup _strdup
+
 typedef unsigned char Num;
 /*
 typedef struct GraphRep {
