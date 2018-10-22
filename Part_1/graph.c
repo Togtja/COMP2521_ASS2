@@ -8,7 +8,7 @@
 #include "graph.h"
 
 #define strEQ(g,t) (strcmp((g),(t)) == 0)
-
+#define strdup _strdup
 typedef unsigned char Num;
 /*
 typedef struct GraphRep {
@@ -160,6 +160,6 @@ int vertexID(char *str, char **names, int N)
 // - add Str at end of Names
 int addVertex(char *str, char **names, int N)
 {
-	names[N] = _strdup(str);
+	names[N] = strdup(str);
 	return N;
 }
