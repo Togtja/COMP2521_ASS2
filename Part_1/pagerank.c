@@ -76,6 +76,7 @@ int main(int argc, char *argv[]) {
     showGraph(urlConnections, 1);
 
 
+    printList(url_list);
     //attempt PR lmao
     //int i = 0;
     //double diff = diffPR;

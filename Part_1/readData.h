@@ -6,6 +6,9 @@
 struct node {
     char * url;
     struct node *next;
+    int pos;
+    int in;
+    int out;
 };
 
 struct List {

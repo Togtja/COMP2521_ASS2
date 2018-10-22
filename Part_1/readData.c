@@ -20,7 +20,7 @@ void printList(List L) {
 
     struct node *ptr = L->head;
     while (ptr != NULL) {
-        printf("%s\n", ptr->url);
+        printf("%s: weight: %d ins: %d outs: %d\n", ptr->url, ptr->pos, ptr->in, ptr->out);
         ptr = ptr->next;
     }
 }
@@ -33,9 +33,15 @@ void insertList(char str[], List L) {
     if (L->head == NULL) {
         L->head = link;
         L->curr = L->head;
+        L->head->pos = 1;
+        L->head->in = 0;
+        L->head->out = 0;
     } else {
         L->curr->next = link;
         L->curr = L->curr->next;
+        L->curr->pos = L->size + 1;
+        L->curr->in = 0;
+        L->curr->out = 0;
     }
 
     L->size++;
@@ -102,6 +108,12 @@ void graphBuilder(List urls, Graph g) {
             if(!isConnected(g, cur->url, str)) {
                 addEdge(g, cur->url, str);
                 printf("%s -> %s\n", cur->url, str);
+                cur->out++;
+                struct node *finder = urls->head;
+                while (strcmp(finder->url, str) != 0) {
+                    finder = finder->next;
+                }
+                finder->in++;
             }
 
         }
