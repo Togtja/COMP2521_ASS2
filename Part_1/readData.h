@@ -17,6 +17,7 @@ struct List {
     struct node *head;
     struct node *curr;
     int size;
+	Graph graph;
 
 };
 
@@ -33,5 +34,8 @@ void insertList(char str[], List L);
 void listOfUrls(char file[], List l);
 //Initialized the pagerank list
 void initPR(List l);
+//Copies lists
+List copy(List l);
+//TODO Make a delete
 
 #endif

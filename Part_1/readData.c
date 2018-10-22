@@ -32,14 +32,14 @@ void insertList(char str[], List L) {
     if (L->head == NULL) {
         L->head = link;
         L->curr = L->head;
-        L->head->pos = 1;
+        L->head->pos = 0;
         L->head->in = 0;
         L->head->out = 0;
 		L->head->val = 0;
     } else {
         L->curr->next = link;
         L->curr = L->curr->next;
-        L->curr->pos = L->size + 1;
+        L->curr->pos = L->size;
         L->curr->in = 0;
         L->curr->out = 0;
 		L->curr->val = 0;
@@ -139,4 +139,36 @@ void initPR(List l) {
 
 		l->curr = l->curr->next;
 	}
+}
+void add(List l,struct node * newN) {
+	if (l->head == NULL) {
+		l->head = newN;
+	}
+	else {
+		l->curr = l->head;
+		while (l->curr->next != NULL) {
+			l->curr = l->curr->next;
+		}
+		l->curr->next = newN;
+	}
+	l->size++;
+}
+List copy(List l) {
+	List cpy = newList();
+	l->curr = l->head;
+	while (l->curr != NULL) {
+		struct node *newN = malloc(sizeof(struct node));
+		newN->next = NULL;
+		newN->pos = l->curr->pos;
+		newN->in = l->curr->in;
+		newN->out = l->curr->out;
+		newN->val = l->curr->val;
+		newN->url = strdup(l->curr->url);
+		l->curr = l->curr->next;
+		add(cpy, newN);
+	}
+	//THIS IS BAD
+	cpy->graph = l->graph;
+	
+	return cpy;
 }
