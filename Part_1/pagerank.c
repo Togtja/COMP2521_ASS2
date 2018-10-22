@@ -30,6 +30,7 @@ int main(int argc, char *argv[]) {
     List url_list = newList();
     listOfUrls("collection", url_list);
 	initPR(url_list);
+
 	printList(url_list);
 	
 	
@@ -43,7 +44,7 @@ int main(int argc, char *argv[]) {
     graphBuilder(url_list, url_list->graph);
 
     showGraph(url_list->graph, 1);
-
+	
 	pageRankCalc(url_list, d, diffPR, maxIterations);
     printList(url_list);
 
