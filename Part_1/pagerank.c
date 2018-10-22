@@ -80,7 +80,7 @@ int main(int argc, char *argv[]) {
     printList(url_list);
 
 	char c = getchar();
-	
+    putchar(c);
 
     //attempt PR lmao
     //int i = 0;
