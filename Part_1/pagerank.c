@@ -6,6 +6,50 @@
 #include "graph.h"
 #include "pagerank.h"
 
+//`void pageRanker(double d, double diffPR, double maxIterations, List urls, Graph g) {
+
+
+
+//}
+
+PRList newPRList(List l) {
+
+    PRList list = malloc(sizeof(struct PRList));
+    list->head = NULL;
+    list->size = l->size;
+    struct node *temp = l->head;
+    while (temp != NULL) {
+
+        struct PRNode *to_add = malloc(sizeof(struct PRNode));
+        to_add->next = NULL;
+        to_add->val = ((float) 1/(float) l->size);
+        if (list->head == NULL) {
+            list->head = to_add;
+        } else {
+            struct PRNode *temp2 = list->head;
+            while (temp2->next != NULL) {
+                temp2 = temp2->next;
+            }
+            temp2->next = to_add;
+        }
+
+        temp = temp->next;
+
+    }
+
+    return list;
+
+}
+
+void printPRList (PRList l) {
+    struct PRNode *temp = l->head;
+    while (temp != NULL) {
+        printf("%.7f\n", temp->val);
+        temp = temp->next;
+    }
+
+}
+
 int main(int argc, char *argv[]) {
 
 
@@ -15,20 +59,26 @@ int main(int argc, char *argv[]) {
 
     printf("%lf, %lf, %lf\n", d, diffPR, maxIterations);
 
-    List l = newList();
-    listOfUrls("collection", l);
-    printList(l);
-    printf("%d\n", l->size);
-
-    Graph urlConnections = newGraph(l->size);
-    graphBuilder(l, urlConnections);
-    showGraph(urlConnections, 1);
+    //build list of urls
+    List url_list = newList();
+    listOfUrls("collection", url_list);
+    printList(url_list);
 
     //build a list of the page ranks of each url
     //and set them all to 1/N, N being num of urls
+    PRList PR_urls = newPRList(url_list);
+    printPRList(PR_urls);
 
-    //int i = 0
-    //diff = diffPR;
+    //build a graph representation of the connections
+    //between urls
+    Graph urlConnections = newGraph(url_list->size);
+    graphBuilder(url_list, urlConnections);
+    showGraph(urlConnections, 1);
+
+
+    //attempt PR lmao
+    //int i = 0;
+    //double diff = diffPR;
     //while (i < maxIterations and diff >= diffPR ) {
     //the pagerank of each url(pi) at i + 1 is:
     //1-d/(num of urls) + d * sum (for all urls that connect to pi (pj)) of

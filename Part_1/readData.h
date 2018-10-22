@@ -16,6 +16,21 @@ struct List {
 
 };
 
+struct PRNode {
+
+    double val;
+    struct PRNode *next;
+
+};
+
+struct PRList {
+
+    struct PRNode *head;
+    int size;
+
+};
+
+typedef struct PRList *PRList;
 typedef struct List *List;
 
 void graphBuilder(List urls, Graph g);
