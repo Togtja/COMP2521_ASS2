@@ -31,8 +31,8 @@ int main(int argc, char *argv[]) {
     listOfUrls("collection", url_list);
 	initPR(url_list);
 	printList(url_list);
-	
-	
+
+
     //build a list of the page ranks of each url
     //and set them all to 1/N, N being num of urls
 
@@ -69,7 +69,7 @@ void pageRankCalc(List l, double damp, double diffPR, int it) {
 	int i = 0; double diff = diffPR; l->curr = l->head;
 	List temp = copy(l); //This dosen't really work
 
-	
+    printf("HI");
 
 	temp->curr = temp->head;
 
@@ -84,7 +84,7 @@ void pageRankCalc(List l, double damp, double diffPR, int it) {
 
 
 			l->curr->val = (1 - damp) / l->size + damp * sum;
-			int j; 
+			int j;
 			temp->curr = temp->head;
 			struct node * oldCurL = l->head; double sum1 = 0;
 			for ( j = 0; oldCurL != NULL || temp->curr != NULL; j++) {
@@ -94,8 +94,8 @@ void pageRankCalc(List l, double damp, double diffPR, int it) {
 			}
 			diff = sum1;
 			//abs(diff);
-			
-			
+
+
 			l->curr = l->curr->next;
 			//abs();
 		}
@@ -114,7 +114,7 @@ float W_in(List l, struct node * src, struct node *p1) {
 	for (; i < l->graph->nV; i++) {
 		if (l->graph->edges[src->pos][i]) {
 			sum += l->curr->in;
-		}	
+		}
 		l->curr = l->curr->next;
 	}
 	l->curr = p1;
@@ -132,7 +132,7 @@ float W_out(List l, struct node * src, struct node *p1) {
 			else{
 				sum += l->curr->out;
 			}
-			
+
 		}
 		l->curr = l->curr->next;
 	}
