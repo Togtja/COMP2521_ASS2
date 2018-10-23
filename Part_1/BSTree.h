@@ -10,7 +10,7 @@ BSTree newBSTree();
 
 void dropBSTree(BSTree t);
 
-void BSTInsert(BSTree t, char *url, char* keyword);
+BSTree BSTInsert(BSTree t, char *url, char* keyword);
 
 void showBSTree(BSTree t);
 

@@ -22,7 +22,6 @@ BSTLink newBSTNode(char *keyword) {
 	BSTLink new = malloc(sizeof(BSTNode));
 	assert(new != NULL);
 	new->key = strdup(keyword);
-    new->keyToInt = new->key[0];
 	new->left = new->right = NULL;
     new->urlList = newList();
 	return new;
@@ -42,31 +41,31 @@ void dropBSTree(BSTree t) {
 	free(t);
 }
 
-void BSTInsert(BSTree t, char *url, char* keyword){
-
-    int cmp = strcmp(keyword, t->key);
-
+BSTree BSTInsert(BSTree t, char *url, char* keyword){
     if (t == NULL) {
         t = newBSTNode(keyword);
         insertList(url, t->urlList);
+		return t;
     //less than keyword on node
-    } else if (cmp < 0) {
-        BSTInsert(t->left, url, keyword);
+    }
+	int cmp = strcmp(keyword, t->key);
+	if (cmp < 0) {
+        t->left = BSTInsert(t->left, url, keyword);
     //greater than
     } else if (cmp > 0) {
-        BSTInsert(t->right, url, keyword);
+		t->right = BSTInsert(t->right, url, keyword);
     } else {
         t->urlList->curr = t->urlList->head;
         while (t->urlList->curr != NULL) {
-            if (strcmp(t->urlList->curr->url, url) == 0) {
-                return;
-            }
+          if (strcmp(t->urlList->curr->url, url) == 0) {
+              return t;
+          }
             t->urlList->curr = t->urlList->curr->next;
         }
 
         insertList(url, t->urlList);
     }
-
+	return t;
 }
 
 // display a BSTree
@@ -92,7 +91,7 @@ void writeBSTree(BSTree t, FILE *fp)
     writeBSTree(t->left, fp);
 
     fprintf(fp, "%s  ", t->key);
-    printOnlyUrls(t->urlList);
+    fprintOnlyUrls(t->urlList, fp);
 
     writeBSTree(t->right, fp);
 

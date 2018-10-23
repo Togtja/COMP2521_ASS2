@@ -27,7 +27,7 @@ int main(int argc, char *argv[]) {
     List url_list = newList();
     listOfUrls("collection", url_list);
 	initPR(url_list);
-
+	printf("\nLIST LIST:\n\n");
 	printList(url_list);
 
     //build a list of the page ranks of each url
@@ -38,9 +38,7 @@ int main(int argc, char *argv[]) {
     //between urls
 	url_list->graph = newGraph(url_list->size);
     graphBuilder(url_list, url_list->graph);
-
-    showGraph(url_list->graph, 1);
-
+	printf("\nCALCULATED LIST:\n\n");
 	pageRankCalc(url_list, d, diffPR, maxIterations);
     printList(url_list);
 
@@ -49,31 +47,12 @@ int main(int argc, char *argv[]) {
 	printList(sort);
 	printListToFile(sort, "pagerankList.txt");
 
-	char * test = "TESTING; CAN. WE: LOWER_ IT?\n";
-	char* ncnst = strdup(test);
-	stringToLower(ncnst);
-	printf("%s", ncnst);
-
-	removeNonLetters(ncnst);
-	printf("%s", ncnst);
-
 	printf("\nBSTree:\n\n");
 	BSTree BST = newBSTree();
 	invIndexBuilder(sort, BST);
 
 	char c = getchar();
 	putchar(c);
-
-    //attempt PR lmao
-    //int i = 0;
-    //double diff = diffPR;
-    //while (i < maxIterations and diff >= diffPR ) {
-    //the pagerank of each url(pi) at i + 1 is:
-    //1-d/(num of urls) + d * sum (for all urls that connect to pi (pj)) of
-    //(pagerank of pj at i) * ((number of urls connecting to pi)/(number of urls connecting to
-    //every url pj connects to)) * ((number of urls pi connects to)/(number of urls that each
-    //url connecting to pj connects to))
-    //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
     return 0;
 }
 List BubbleSortList(List l) {

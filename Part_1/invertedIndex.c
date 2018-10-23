@@ -8,10 +8,11 @@
 
 void invIndexBuilder (List l, BSTree t) {
 
-    l->curr = l->head;
-    while (l->curr != NULL) {
+    struct node *curr = l->head;
+    while (curr != NULL) {
 
-        char * filename = malloc(strlen(l->curr->url) + strlen(".txt") + 1);
+        char * filename = malloc(strlen(curr->url) + strlen(".txt") + 1);
+		strcpy(filename, curr->url);
         strcat(filename, ".txt");
         FILE *fp = fopen(filename, "r");
 
@@ -19,7 +20,7 @@ void invIndexBuilder (List l, BSTree t) {
             printf("Error could not open");
             fclose(fp);
             free(filename);
-            exit(-1);
+			return;
         }
         //come back later and FIX
         char str[100];
@@ -33,24 +34,31 @@ void invIndexBuilder (List l, BSTree t) {
 
             if (strstr(str, "Section-2")) {
                 s2flag++;
+				continue;
             }
 
             if (s2flag == 4) {
                 char *str_to_insert = normalise(str);
-                BSTInsert(t,l->curr->url, str_to_insert);
+                t = BSTInsert(t,curr->url, str_to_insert);
             }
 
         }
 
         fclose(fp);
         free(filename);
-        l->curr = l->curr->next;
+        curr = curr->next;
 
 
     }
+	FILE* fp = fopen("invertedIndex.txt", "w");
+	if (fp == NULL) {
 
-    showBSTree(t);
+		printf("you suck");
+		exit(-1);
 
+	}
+	writeBSTree(t, fp);
+	fclose(fp);
 }
 void stringToLower(char *str) {
 	char* s;

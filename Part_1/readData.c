@@ -59,6 +59,10 @@ void insertList(char str[], List L) {
         L->head->out = 0;
 		L->head->val = 0;
     } else {
+		L->curr = L->head;
+		while (L->curr->next != NULL) {
+			L->curr = L->curr->next;
+		}
         L->curr->next = link;
         L->curr = L->curr->next;
         L->curr->pos = L->size;
@@ -112,8 +116,6 @@ void graphBuilder(List urls, Graph g) {
         strcpy(url_name, cur->url);
         strcat(url_name, ".txt");
 
-        printf("opening %s\n", url_name);
-
         FILE *fp = fopen(url_name, "r");
 
         if (fp == NULL) {
@@ -138,7 +140,6 @@ void graphBuilder(List urls, Graph g) {
 
             if(!isConnected(g, cur->url, str) && strcmp(cur->url, str) != 0) {
                 addEdge(g, cur->url, str);
-                printf("%s -> %s\n", cur->url, str);
                 cur->out++;
                 struct node *finder = urls->head;
                 while (strcmp(finder->url, str) != 0) {
