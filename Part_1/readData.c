@@ -24,6 +24,30 @@ void printList(List L) {
     }
 }
 
+void printOnlyUrls(List L) {
+
+    struct node *ptr = L->head;
+    while (ptr != NULL) {
+        printf("%s ", ptr->url);
+        ptr = ptr->next;
+    }
+    printf("\n");
+
+}
+
+void fprintOnlyUrls(List L, FILE *fp) {
+
+    struct node *ptr = L->head;
+    while (ptr != NULL) {
+        fprintf(fp, "%s ", ptr->url);
+        ptr = ptr->next;
+    }
+    fprintf(fp, "\n");
+
+}
+
+
+
 void insertList(char str[], List L) {
     struct node *link = malloc(sizeof(struct node));
     link->url = malloc(strlen(str) * sizeof(char) + 1);

@@ -29,6 +29,9 @@ List newList();
 
 void printList(List L);
 
+void printOnlyUrls(List L);
+void fprintOnlyUrls(List L, FILE *fp);
+
 void insertList(char str[], List L);
 
 void listOfUrls(char file[], List l);
