@@ -13,10 +13,6 @@ float W_in(List l, struct node * src, struct node *p1);
 float W_out(List l, struct node * src, struct node *p1);
 List BubbleSortList(List l);
 void printListToFile(List l, char* fileName);
-//changes the pointer to lower
-void stringToLower(char* str);
-//removes ',' '.' ':' '?' from string
-void removeNonLetters(char* str);
 
 int main(int argc, char *argv[]) {
 
