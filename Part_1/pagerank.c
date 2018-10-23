@@ -6,6 +6,7 @@
 #include "graph.h"
 #include "pagerank.h"
 #include <math.h>
+#include <ctype.h>
 
 //`void pageRanker(double d, double diffPR, double maxIterations, List urls, Graph g) {
 
@@ -17,6 +18,9 @@ float W_in(List l, struct node * src, struct node *p1);
 float W_out(List l, struct node * src, struct node *p1);
 List BubbleSortList(List l);
 void printListToFile(List l, char* fileName);
+char* toLowerStr(char* word);
+
+
 
 int main(int argc, char *argv[]) {
 
@@ -53,6 +57,19 @@ int main(int argc, char *argv[]) {
 	printf("\nSORTED LIST:\n\n");
 	printList(sort);
 	printListToFile(sort, "pagerankList.txt");
+
+
+
+	char * test = "HELLO DOES IT WORK\n";
+	printf("%s", test);
+	char* test2 = toLowerStr(test);
+	printf("%s", test2);
+
+	free(test2);
+
+
+
+
 	char c = getchar();
     putchar(c);
 
@@ -67,6 +84,7 @@ int main(int argc, char *argv[]) {
     //url connecting to pj connects to))
     //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
     //
+
 
     return 0;
 
@@ -124,7 +142,6 @@ void printListToFile(List l, char* fileName) {
 		return;
 	}
 	while (l->curr != NULL) {
-		printf("We did some printing to file");
 		fprintf(fp, "%s, %d, %.7f\n", l->curr->url, l->curr->out, l->curr->val);
 		l->curr = l->curr->next;
 	}
@@ -225,4 +242,16 @@ float W_out(List l, struct node * src, struct node *p1) {
 		return 0.5/sum;
 	}
 	return p1->out / (sum);
+}
+
+char* toLowerStr(char* word) {
+	int i; char* ret = malloc(sizeof(strlen(word + 1)));
+	for ( i = 0; i < strlen(word); i++) {
+		ret[i] = tolower(word[i]);
+	}
+	strcat(ret, "\0");
+	return ret;
+}
+char* removeNonLetters() {
+
 }
