@@ -48,6 +48,8 @@ void invIndexBuilder (List l, BSTree t) {
 
     }
 
+    showBSTree(t);
+
 }
 void stringToLower(char *str) {
 	char* s;
