@@ -7,11 +7,7 @@
 #include "pagerank.h"
 #include <math.h>
 
-//`void pageRanker(double d, double diffPR, double maxIterations, List urls, Graph g) {
 
-
-
-//}
 void pageRankCalc(List l, double damp, double diffPR, int it);
 float W_in(List l, struct node * src, struct node *p1);
 float W_out(List l, struct node * src, struct node *p1);
@@ -19,20 +15,10 @@ List BubbleSortList(List l);
 void printListToFile(List l, char* fileName);
 //changes the pointer to lower
 void stringToLower(char* str);
+//removes ',' '.' ':' '?' from string
 void removeNonLetters(char* str);
 
-void removeChar(char *str, char garbage) {
-
-	char *src, *dst;
-	for (src = dst = str; *src != '\0'; src++) {
-		*dst = *src;
-		if (*dst != garbage) dst++;
-	}
-	*dst = '\0';
-}
-
 int main(int argc, char *argv[]) {
-
 
     double d = atof(argv[1]);
     double diffPR = atof(argv[2]);
@@ -46,7 +32,6 @@ int main(int argc, char *argv[]) {
 	initPR(url_list);
 
 	printList(url_list);
-
 
     //build a list of the page ranks of each url
     //and set them all to 1/N, N being num of urls
@@ -66,7 +51,7 @@ int main(int argc, char *argv[]) {
 	printf("\nSORTED LIST:\n\n");
 	printList(sort);
 	printListToFile(sort, "pagerankList.txt");
-		
+
 	char * test = "TESTING; CAN. WE: LOWER_ IT?\n";
 	char* ncnst = strdup(test);
 	stringToLower(ncnst);
@@ -75,14 +60,10 @@ int main(int argc, char *argv[]) {
 	removeNonLetters(ncnst);
 	printf("%s", ncnst);
 
-
 	//free(test2);
 
-
-
-
 	char c = getchar();
-    putchar(c);
+	putchar(c);
 
     //attempt PR lmao
     //int i = 0;
@@ -94,27 +75,17 @@ int main(int argc, char *argv[]) {
     //every url pj connects to)) * ((number of urls pi connects to)/(number of urls that each
     //url connecting to pj connects to))
     //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-    //
-
-
     return 0;
-
 }
 List BubbleSortList(List l) {
-	if (l->head == NULL || l->head->next == NULL) {
-		printf("List is smaller 2 or less");
+	if (l->head == NULL || l->head->next == NULL || l->size <= 3) {
+		printf("List is smaller 3 or less");
+		return;
 	}
 	List ret = copy(l);
 	struct node * prv = NULL;
 	struct node * cmp1 = ret->head;
 	struct node * cmp2 = ret->head->next;
-	//FAKE LIST
-	/* 3 - head
-	*  4 - prv
-	*  6 - cmp1
-	*  5 - cmp2
-	*  2
-	*/
 	int c;
 	for (c = 0; c < ret->size * ret->size; c++) {
 		if (cmp1->val < cmp2->val) {
@@ -172,8 +143,6 @@ void pageRankCalc(List l, double damp, double diffPR, int it) {
 					sum += temp->curr->val * W_in(l, temp->curr, l->curr) * W_out(l, temp->curr, l->curr);
                 }
 			}
-
-
 			l->curr->val = ((1 - damp) /  l->size) + damp * sum;
             int j;
 			temp->curr = temp->head;
@@ -184,10 +153,8 @@ void pageRankCalc(List l, double damp, double diffPR, int it) {
 				oldCurL = oldCurL->next;
 			}
 			diff = sum1;
-
 			l->curr = l->curr->next;
 		}
-
 		free(temp);
 		temp = copy(l);
 		l->curr = l->head;
