@@ -6,7 +6,8 @@
 #include "graph.h"
 #include "pagerank.h"
 #include <math.h>
-
+#include "BSTree.h"
+#include "invertedIndex.h"
 
 void pageRankCalc(List l, double damp, double diffPR, int it);
 float W_in(List l, struct node * src, struct node *p1);
@@ -56,7 +57,9 @@ int main(int argc, char *argv[]) {
 	removeNonLetters(ncnst);
 	printf("%s", ncnst);
 
-	//free(test2);
+	printf("\nBSTree:\n\n");
+	BSTree BST = newBSTree();
+	invIndexBuilder(sort, BST);
 
 	char c = getchar();
 	putchar(c);
