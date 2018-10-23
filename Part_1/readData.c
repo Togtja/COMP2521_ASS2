@@ -18,6 +18,7 @@ void printList(List l) {
     l->curr = l->head;
     while (l->curr != NULL) {
 		printf("%s: weight: %d ins: %d outs: %d value: %.7f\n", l->curr->url, l->curr->pos, l->curr->in, l->curr->out, l->curr->val);
+		printf("Ranked Value: %d\n", l->curr->rankVal);
 		l->curr = l->curr->next;
     }
 }
@@ -58,6 +59,7 @@ void insertList(char str[], List L) {
         L->head->in = 0;
         L->head->out = 0;
 		L->head->val = 0;
+		L->head->rankVal = 0;
     } else {
 		L->curr = L->head;
 		while (L->curr->next != NULL) {
@@ -69,6 +71,7 @@ void insertList(char str[], List L) {
         L->curr->in = 0;
         L->curr->out = 0;
 		L->curr->val = 0;
+		L->curr->rankVal = 0;
     }
 
     L->size++;
@@ -193,6 +196,7 @@ List copy(List l) {
 		newN->in = l->curr->in;
 		newN->out = l->curr->out;
 		newN->val = l->curr->val;
+		newN->rankVal= l->curr->rankVal;
 		newN->url = strdup(l->curr->url);
 		l->curr = l->curr->next;
 		add(cpy, newN);

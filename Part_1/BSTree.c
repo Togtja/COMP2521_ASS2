@@ -6,6 +6,7 @@
 #include <string.h>
 #include "BSTree.h"
 #include "readData.h"
+#include "invertedIndex.h"
 
 typedef struct BSTNode *BSTLink;
 
@@ -96,3 +97,4 @@ void writeBSTree(BSTree t, FILE *fp)
     writeBSTree(t->right, fp);
 
 }
+

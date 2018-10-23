@@ -44,12 +44,16 @@ void invIndexBuilder (List l, BSTree t) {
 
         }
 
+
+
         fclose(fp);
         free(filename);
         curr = curr->next;
 
 
     }
+
+
 	FILE* fp = fopen("invertedIndex.txt", "w");
 	if (fp == NULL) {
 

@@ -2,6 +2,7 @@
 #ifndef BSTREE_H
 #define BSTREE_H
 #include <stdio.h>
+#include "readData.h"
 
 typedef struct BSTNode *BSTree;
 
@@ -15,4 +16,6 @@ BSTree BSTInsert(BSTree t, char *url, char* keyword);
 void showBSTree(BSTree t);
 
 void writeBSTree(BSTree t, FILE *fp);
+
+List findInBSTree(BSTree t, char* str);
 #endif

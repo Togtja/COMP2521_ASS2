@@ -10,6 +10,7 @@ struct node {
     int in;
     int out;
 	float val;
+	int rankVal;
 };
 
 struct List {

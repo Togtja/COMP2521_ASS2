@@ -1,4 +1,4 @@
-#include <stdlib.h>
+/*#include <stdlib.h>
 #include <stdio.h>
 #include <string.h>
 #include "readData.h"
@@ -51,10 +51,16 @@ int main(int argc, char *argv[]) {
 	BSTree BST = newBSTree();
 	invIndexBuilder(sort, BST);
 
+
 	char c = getchar();
 	putchar(c);
     return 0;
 }
+
+
+
+
+
 List BubbleSortList(List l) {
 	if (l->head == NULL || l->head->next == NULL || l->size <= 3) {
 		printf("List is smaller 3 or less");
@@ -173,5 +179,5 @@ float W_out(List l, struct node * src, struct node *p1) {
 		return 0.5/sum;
 	}
 	return p1->out / (sum);
-}
+}*/
 
