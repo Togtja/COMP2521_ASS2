@@ -125,13 +125,17 @@ void graphBuilder(List urls, Graph g) {
 			cur = cur->next;
 			continue;
         }
-
+        //later gator
         char str[100];
 
         while (fscanf(fp, "%s", str) != EOF) {
 
-            if (!strstr(str, "url")) {
+            if (strstr(str, "Section-1") || strstr(str, "#start")) {
                 continue;
+            }
+
+            if (strstr(str, "#end")) {
+                break;
             }
 
             if(!isConnected(g, cur->url, str) && strcmp(cur->url, str) != 0) {

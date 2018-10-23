@@ -90,7 +90,7 @@ int main(int argc, char *argv[]) {
 
 }
 List BubbleSortList(List l) {
-	if (l->head == NULL || l->head->next == NULL) { 
+	if (l->head == NULL || l->head->next == NULL) {
 		printf("List is smaller 2 or less");
 	}
 	List ret = copy(l);
@@ -98,12 +98,12 @@ List BubbleSortList(List l) {
 	struct node * cmp1 = ret->head;
 	struct node * cmp2 = ret->head->next;
 	//FAKE LIST
-	/* 3 - head  
+	/* 3 - head
 	*  4 - prv
 	*  6 - cmp1
 	*  5 - cmp2
 	*  2
-	*/ 
+	*/
 	int c;
 	for (c = 0; c < ret->size * ret->size; c++) {
 		if (cmp1->val < cmp2->val) {
@@ -116,7 +116,7 @@ List BubbleSortList(List l) {
 			else {
 				prv->next = cmp2;
 			}
-			
+
 			prv = cmp2;
 			cmp2 = cmp1->next;
 		}
@@ -252,6 +252,6 @@ char* toLowerStr(char* word) {
 	strcat(ret, "\0");
 	return ret;
 }
-char* removeNonLetters() {
-
-}
+//char* removeNonLetters() {
+//
+//}
