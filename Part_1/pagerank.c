@@ -109,6 +109,16 @@ void pageRankCalc(List l, double damp, double diffPR, int it) {
 		l->curr = l->head;
 		temp->curr = temp->head;
 	}
+
+    FILE *fp;
+    fp = fopen("pagerankList.txt", "w");
+    if (fp == NULL) {
+        exit(-1);
+    }
+
+
+
+
 }
 
 float W_in(List l, struct node * src, struct node *p1) {
