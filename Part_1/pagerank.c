@@ -196,29 +196,4 @@ float W_out(List l, struct node * src, struct node *p1) {
 	}
 	return p1->out / (sum);
 }
-//
-void stringToLower(char *str) {
-	char* s;
-	for (s = str; *s; ++s) *s = *s >= 'A'&&*s <= 'Z' ? *s | 0x60 : *s;
-}
-//Author Fabio Cabral
-//https://stackoverflow.com/questions/5457608/how-to-remove-the-character-at-a-given-index-from-a-string-in-c
-void removeNonLetters(char *str) {
-	char *src, *dst;
-	for (src = dst = str; *src; src++) {
-		*dst = *src;
-		if (*dst != '.' &&
-			*dst != ',' &&
-			*dst != ';' &&
-			*dst != '?') dst++;
-	}
-	*dst = '\0';
-}
-char* doTheThing(const char * str) {
-	char* p = strdup(str);
-	stringToLower(p);
-	removeNonLetters(p);
-	return p;
-
-}
 
