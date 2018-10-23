@@ -16,7 +16,7 @@ void pageRankCalc(List l, double damp, double diffPR, int it);
 float W_in(List l, struct node * src, struct node *p1);
 float W_out(List l, struct node * src, struct node *p1);
 List BubbleSortList(List l);
-void isSortet(List l);
+void printListToFile(List l, char* fileName);
 
 int main(int argc, char *argv[]) {
 
@@ -50,8 +50,9 @@ int main(int argc, char *argv[]) {
     printList(url_list);
 
 	List sort = BubbleSortList(url_list);
-	isSortet(sort);
+	printf("\nSORTED LIST:\n\n");
 	printList(sort);
+	printListToFile(sort, "pagerankList.txt");
 	char c = getchar();
     putchar(c);
 
@@ -86,7 +87,6 @@ List BubbleSortList(List l) {
 	*  2
 	*/ 
 	int c;
-	printf("We get stuck in Bubsort:");
 	for (c = 0; c < ret->size * ret->size; c++) {
 		if (cmp1->val < cmp2->val) {
 			cmp1->next = cmp2->next;
@@ -115,17 +115,20 @@ List BubbleSortList(List l) {
 	}
 	return ret;
 }
-void isSortet(List l) {
-	printf("We get stuck in isSorted:");
+void printListToFile(List l, char* fileName) {
 	l->curr = l->head;
-	while (l->curr->next != NULL) {
-		printf("Pos: %d\n", l->curr->pos);
-		if (l->curr->val < l->curr->next->val) {
-			printf("WE FAILED\n"); return;
-		}
+	FILE *fp = fopen(fileName, "w");
+	if (fp == NULL) {
+		printf("Something wrong happened\n");
+		fclose(fp);
+		return;
+	}
+	while (l->curr != NULL) {
+		printf("We did some printing to file");
+		fprintf(fp, "%s, %d, %.7f\n", l->curr->url, l->curr->out, l->curr->val);
 		l->curr = l->curr->next;
 	}
-	printf("Seems okidoki\n");
+	fclose(fp);
 }
 void pageRankCalc(List l, double damp, double diffPR, int it) {
 	int i = 0; double diff = diffPR; l->curr = l->head;
@@ -171,12 +174,12 @@ void pageRankCalc(List l, double damp, double diffPR, int it) {
 		temp->curr = temp->head;
 	}
 
-    FILE *fp;
-    fp = fopen("pagerankList.txt", "w");
-    if (fp == NULL) {
-        exit(-1);
-    }
-
+//    FILE *fp;
+//    fp = fopen("pagerankList.txt", "w");
+//    if (fp == NULL) {
+//        exit(-1);
+//    }
+//	fclose(fp);
 
 
 

@@ -15,12 +15,12 @@ List newList() {
     return list;
 }
 
-void printList(List L) {
+void printList(List l) {
 
-    struct node *ptr = L->head;
-    while (ptr != NULL) {
-        printf("%s: weight: %d ins: %d outs: %d value: %.7f\n", ptr->url, ptr->pos, ptr->in, ptr->out, ptr->val);
-        ptr = ptr->next;
+    l->curr = l->head;
+    while (l->curr != NULL) {
+		printf("%s: weight: %d ins: %d outs: %d value: %.7f\n", l->curr->url, l->curr->pos, l->curr->in, l->curr->out, l->curr->val);
+		l->curr = l->curr->next;
     }
 }
 
@@ -119,7 +119,11 @@ void graphBuilder(List urls, Graph g) {
         FILE *fp = fopen(url_name, "r");
 
         if (fp == NULL) {
-            printf("h");
+            printf("Could not fine file: %s\n", url_name);
+			fclose(fp);
+			free(url_name);
+			cur = cur->next;
+			continue;
         }
 
         char str[100];
