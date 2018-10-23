@@ -36,7 +36,8 @@ void invIndexBuilder (List l, BSTree t) {
             }
 
             if (s2flag == 4) {
-                BSTInsert(t,l->curr->url, str);
+                char *str_to_insert = normalise(str);
+                BSTInsert(t,l->curr->url, str_to_insert);
             }
 
         }
