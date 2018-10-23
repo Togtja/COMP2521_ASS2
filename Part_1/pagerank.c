@@ -15,7 +15,8 @@
 void pageRankCalc(List l, double damp, double diffPR, int it);
 float W_in(List l, struct node * src, struct node *p1);
 float W_out(List l, struct node * src, struct node *p1);
-
+List BubbleSortList(List l);
+void isSortet(List l);
 
 int main(int argc, char *argv[]) {
 
@@ -48,6 +49,9 @@ int main(int argc, char *argv[]) {
 	pageRankCalc(url_list, d, diffPR, maxIterations);
     printList(url_list);
 
+	List sort = BubbleSortList(url_list);
+	isSortet(sort);
+	printList(sort);
 	char c = getchar();
     putchar(c);
 
@@ -65,6 +69,63 @@ int main(int argc, char *argv[]) {
 
     return 0;
 
+}
+List BubbleSortList(List l) {
+	if (l->head == NULL || l->head->next == NULL) { 
+		printf("List is smaller 2 or less");
+	}
+	List ret = copy(l);
+	struct node * prv = NULL;
+	struct node * cmp1 = ret->head;
+	struct node * cmp2 = ret->head->next;
+	//FAKE LIST
+	/* 3 - head  
+	*  4 - prv
+	*  6 - cmp1
+	*  5 - cmp2
+	*  2
+	*/ 
+	int c;
+	printf("We get stuck in Bubsort:");
+	for (c = 0; c < ret->size * ret->size; c++) {
+		if (cmp1->val < cmp2->val) {
+			cmp1->next = cmp2->next;
+			cmp2->next = cmp1;
+			int ind = cmp1->pos;
+			cmp1->pos = cmp2->pos;
+			cmp2->pos = ind;
+			if (prv == NULL) { ret->head = cmp2; }
+			else {
+				prv->next = cmp2;
+			}
+			
+			prv = cmp2;
+			cmp2 = cmp1->next;
+		}
+		else {
+			prv = cmp1;
+			cmp1 = cmp2;
+			cmp2 = cmp2->next;
+		}
+		if (cmp2 == NULL) {
+			prv = NULL;
+			cmp1 = ret->head;
+			cmp2 = ret->head->next;
+		}
+	}
+	return ret;
+}
+void isSortet(List l) {
+	printf("We get stuck in isSorted:");
+	l->curr = l->head;
+	while (l->curr->next != NULL) {
+		printf("Pos: %d\n", l->curr->pos);
+		if (l->curr->val < l->curr->next->val) {
+			printf("WE FAILED\n"); return;
+		}
+		l->curr = l->curr->next;
+	}
+	printf("Seems okidoki\n");
 }
 void pageRankCalc(List l, double damp, double diffPR, int it) {
 	int i = 0; double diff = diffPR; l->curr = l->head;
