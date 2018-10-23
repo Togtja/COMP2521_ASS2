@@ -76,7 +76,7 @@ int main(int argc, char *argv[]) {
 List BubbleSortList(List l) {
 	if (l->head == NULL || l->head->next == NULL || l->size <= 3) {
 		printf("List is smaller 3 or less");
-		return;
+		return l;
 	}
 	List ret = copy(l);
 	struct node * prv = NULL;
