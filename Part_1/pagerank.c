@@ -101,7 +101,7 @@ int main(int argc, char *argv[]) {
 
 }
 List BubbleSortList(List l) {
-	if (l->head == NULL || l->head->next == NULL) { 
+	if (l->head == NULL || l->head->next == NULL) {
 		printf("List is smaller 2 or less");
 	}
 	List ret = copy(l);
@@ -109,12 +109,12 @@ List BubbleSortList(List l) {
 	struct node * cmp1 = ret->head;
 	struct node * cmp2 = ret->head->next;
 	//FAKE LIST
-	/* 3 - head  
+	/* 3 - head
 	*  4 - prv
 	*  6 - cmp1
 	*  5 - cmp2
 	*  2
-	*/ 
+	*/
 	int c;
 	for (c = 0; c < ret->size * ret->size; c++) {
 		if (cmp1->val < cmp2->val) {
@@ -127,7 +127,7 @@ List BubbleSortList(List l) {
 			else {
 				prv->next = cmp2;
 			}
-			
+
 			prv = cmp2;
 			cmp2 = cmp1->next;
 		}
@@ -160,8 +160,7 @@ void printListToFile(List l, char* fileName) {
 }
 void pageRankCalc(List l, double damp, double diffPR, int it) {
 	int i = 0; double diff = diffPR; l->curr = l->head;
-	List temp = copy(l); //This dosen't really work
-  //  printf("HI\n");
+	List temp = copy(l);
 
 	temp->curr = temp->head;
 
@@ -171,46 +170,29 @@ void pageRankCalc(List l, double damp, double diffPR, int it) {
 			for (temp->curr = temp->head; temp->curr != NULL; temp->curr = temp->curr->next) {
 				if (l->graph->edges[temp->curr->pos][l->curr->pos]) {
 					sum += temp->curr->val * W_in(l, temp->curr, l->curr) * W_out(l, temp->curr, l->curr);
-//				    printf("sum %.7f\n", sum);
                 }
 			}
 
 
-			l->curr->val = ((float) (1 - damp) / (float) l->size) + damp * sum;
-//			printf("%.7f\n", l->curr->val);
+			l->curr->val = ((1 - damp) /  l->size) + damp * sum;
             int j;
 			temp->curr = temp->head;
 			struct node * oldCurL = l->head; double sum1 = 0;
 			for ( j = 0; oldCurL != NULL || temp->curr != NULL; j++) {
 				sum1 += fabs(oldCurL->val - temp->curr->val);
-				//printf("cur val: %.7f old val: %.7f sum1: %.7f", oldCurL->val, temp->curr->val, sum1);
                 temp->curr = temp->curr->next;
 				oldCurL = oldCurL->next;
 			}
 			diff = sum1;
-			//abs(diff);
-
 
 			l->curr = l->curr->next;
-			//abs();
 		}
-//		printf("diff : %.7f\ndiffRP: %.7f\n\n", diff, diffPR);
 
 		free(temp);
 		temp = copy(l);
 		l->curr = l->head;
 		temp->curr = temp->head;
 	}
-
-//    FILE *fp;
-//    fp = fopen("pagerankList.txt", "w");
-//    if (fp == NULL) {
-//        exit(-1);
-//    }
-//	fclose(fp);
-
-
-
 }
 
 float W_in(List l, struct node * src, struct node *p1) {
@@ -219,20 +201,15 @@ float W_in(List l, struct node * src, struct node *p1) {
 	for (i = 0; i < l->graph->nV; i++) {
 		if (l->graph->edges[src->pos][i]) {
 			sum += l->curr->in;
-            //printf("%s %df\n", l->curr->url, l->curr->in);
 		}
 		l->curr = l->curr->next;
 	}
 	l->curr = p1;
-    //printf("W In sum: %.7f\n", sum);
 	return p1->in / (sum);
 
 }
 float W_out(List l, struct node * src, struct node *p1) {
 	int i = 0; float sum = 0;
-    //if (p1->out == 0) {
-    //    sum = 0.5;
-    //}
 	l->curr = l->head;
 	for (i = 0; i < l->graph->nV; i++) {
 		if (l->graph->edges[src->pos][i]) {
@@ -242,13 +219,11 @@ float W_out(List l, struct node * src, struct node *p1) {
 			else{
 				sum += l->curr->out;
 			}
- //           printf("%s %d\n", l->curr->url, l->curr->out);
 
 		}
 		l->curr = l->curr->next;
 	}
 	l->curr = p1;
-   // printf("W out sum: %.7f\n", sum);
 	if (p1->out == 0) {
 		return 0.5/sum;
 	}
@@ -279,3 +254,4 @@ char* doTheThing(const char * str) {
 	return p;
 
 }
+

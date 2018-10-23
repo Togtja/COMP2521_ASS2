@@ -1,7 +1,7 @@
 // BSTree.h ... interface to binary search tree ADT
-
 #ifndef BSTREE_H
 #define BSTREE_H
+#include <stdio.h>
 
 typedef struct BSTNode *BSTree;
 
