@@ -1,4 +1,4 @@
-/*#include <stdlib.h>
+#include <stdlib.h>
 #include <stdio.h>
 #include <string.h>
 #include "readData.h"
@@ -179,5 +179,5 @@ float W_out(List l, struct node * src, struct node *p1) {
 		return 0.5/sum;
 	}
 	return p1->out / (sum);
-}*/
+}
 
