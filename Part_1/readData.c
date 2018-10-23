@@ -106,7 +106,7 @@ void graphBuilder(List urls, Graph g) {
                 continue;
             }
 
-            if(!isConnected(g, cur->url, str)) {
+            if(!isConnected(g, cur->url, str) && strcmp(cur->url, str) != 0) {
                 addEdge(g, cur->url, str);
                 printf("%s -> %s\n", cur->url, str);
                 cur->out++;
@@ -169,6 +169,6 @@ List copy(List l) {
 	}
 	//THIS IS BAD
 	cpy->graph = l->graph;
-	
+
 	return cpy;
 }
