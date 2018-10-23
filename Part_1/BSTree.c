@@ -11,17 +11,18 @@ typedef struct BSTNode *BSTLink;
 
 typedef struct BSTNode {
 	char * key;
+    int keyToInt;
     List urlList;
 	BSTLink left, right;
 } BSTNode;
 
 // make a new node containing a value
 static
-BSTLink newBSTNode(char *keyword)
-{
+BSTLink newBSTNode(char *keyword) {
 	BSTLink new = malloc(sizeof(BSTNode));
 	assert(new != NULL);
 	new->key = strdup(keyword);
+    new->keyToInt = new->key[0];
 	new->left = new->right = NULL;
     new->urlList = newList();
 	return new;
@@ -34,8 +35,7 @@ BSTree newBSTree()
 }
 
 // free memory associated with BSTree
-void dropBSTree(BSTree t)
-{
+void dropBSTree(BSTree t) {
 	if (t == NULL) return;
 	dropBSTree(t->left);
 	dropBSTree(t->right);
@@ -44,8 +44,26 @@ void dropBSTree(BSTree t)
 
 void BSTInsert(BSTree t, char *url, char* keyword){
 
+    int cmp = strcmp(keyword, t->key);
+
     if (t == NULL) {
         t = newBSTNode(keyword);
+        insertList(url, t->urlList);
+    //less than keyword on node
+    } else if (cmp < 0) {
+        BSTInsert(t->left, url, keyword);
+    //greater than
+    } else if (cmp > 0) {
+        BSTInsert(t->right, url, keyword);
+    } else {
+        t->urlList->curr = t->urlList->head;
+        while (t->urlList->curr != NULL) {
+            if (strcmp(t->urlList->curr->url, url) == 0) {
+                return;
+            }
+            t->urlList->curr = t->urlList->curr->next;
+        }
+
         insertList(url, t->urlList);
     }
 
