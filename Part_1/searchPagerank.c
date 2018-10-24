@@ -12,34 +12,29 @@ List fileToList(char* find);
 void PRList(List list);
 
 int main(int argc, char* argv[]) {
-	for (int i = 1; i < argc; i++) {
-		printf("%s", argv[i]);
-	}
-	char* find[] = {
-		"jupiter",
-		"japan",
-		"intelligent",
-		"jupitor",
-	};
-	int c = 4;
+
+
 
 	//List* list = malloc(c * sizeof(List));
+	List mainL = fileToList(argv[1]);
 	int i;
-	List main = fileToList(argv[1]);
 	for (i = 2; i < argc; i++) {
 		List list = fileToList(argv[i]);
-		mergeList(main, list);//merge free second argument
+		mergeList(mainL, list);//merge free second argument
 	}
+
+	//DELETE LIST OF LIST
 	printf("\n\nMERGED: \n");
-	printList(main);
+	printList(mainL);
 
 	printf("\n\nRPList\n\n");
-	PRList(main);
+	PRList(mainL);
 	printf("\n\nSortListPR\n\n");
-	BubbleSortListPR(main);
+	BubbleSortListPR(mainL);
 	printf("\n\nSortListRV\n\n");
-	BubbleSortListRV(main);
-	printList(main);
+	BubbleSortListRV(mainL);
+	printList(mainL);
+	deleteList(mainL);
 	char k = getchar();
 	putchar(k);
 	return 0;
@@ -122,7 +117,7 @@ List mergeList(List l1, List l2) {
 		}
 		l2->curr = l2->curr->next;
 	}
-	//Free l2;
+	deleteList(l2);
 	return l1;
 }
 
