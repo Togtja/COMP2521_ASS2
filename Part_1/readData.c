@@ -206,3 +206,16 @@ List copy(List l) {
 
 	return cpy;
 }
+
+void deleteList(List l) {
+	l->head = l->curr;
+	while (l->curr != NULL) {
+		struct node* remv = l->curr;
+		l->curr = l->curr->next;
+		free(remv->url);
+		free(remv);
+	}
+	//free(l->curr->url);
+	//free(l->curr);
+	free(l);
+}

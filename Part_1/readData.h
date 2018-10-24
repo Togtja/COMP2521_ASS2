@@ -40,6 +40,6 @@ void listOfUrls(char file[], List l);
 void initPR(List l);
 //Copies lists
 List copy(List l);
-//TODO Make a delete
-
+//deltes list
+void deleteList(List l);
 #endif

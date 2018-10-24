@@ -181,4 +181,3 @@ float W_out(List l, struct node * src, struct node *p1) {
 	}
 	return p1->out / (sum);
 }
-
