@@ -18,5 +18,5 @@ void showBSTree(BSTree t);
 
 void writeBSTree(BSTree t, FILE *fp);
 
-List findInBSTree(BSTree t, char* str);
+//List findInBSTree(BSTree t, char* str);
 #endif

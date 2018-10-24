@@ -13,7 +13,6 @@ typedef struct BSTNode *BSTLink;
 
 typedef struct BSTNode {
 	char * key;
-    int keyToInt;
     List urlList;
 	BSTLink left, right;
 } BSTNode;
