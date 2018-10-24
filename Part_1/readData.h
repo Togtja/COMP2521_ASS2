@@ -2,6 +2,7 @@
 #define READDATA_H
 
 #include "graph.h"
+#include "posix.h"
 
 struct node {
     char * url;

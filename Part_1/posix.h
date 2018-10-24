@@ -7,3 +7,5 @@
 
 
 char * nStrdup(const char *s);
+
+#endif

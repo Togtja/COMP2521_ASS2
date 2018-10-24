@@ -7,6 +7,7 @@
 #include "BSTree.h"
 #include "readData.h"
 #include "invertedIndex.h"
+#include "posix.h"
 
 typedef struct BSTNode *BSTLink;
 
@@ -22,7 +23,7 @@ static
 BSTLink newBSTNode(char *keyword) {
 	BSTLink new = malloc(sizeof(BSTNode));
 	assert(new != NULL);
-	new->key = strdup(keyword);
+	new->key = nStrdup(keyword);
 	new->left = new->right = NULL;
     new->urlList = newList();
 	return new;

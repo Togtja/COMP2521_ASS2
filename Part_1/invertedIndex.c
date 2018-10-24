@@ -5,6 +5,7 @@
 #include "BSTree.h"
 #include "readData.h"
 #include "invertedIndex.h"
+#include "posix.h"
 
 void invIndexBuilder (List l, BSTree t) {
 
@@ -82,7 +83,7 @@ void removeNonLetters(char *str) {
 	*dst = '\0';
 }
 char* normalise(const char * str) {
-	char* p = strdup(str);
+	char* p = nStrdup(str);
 	stringToLower(p);
 	removeNonLetters(p);
 	return p;

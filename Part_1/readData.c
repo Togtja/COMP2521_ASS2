@@ -4,6 +4,7 @@
 #include "readData.h"
 #include "queue.h"
 #include "graph.h"
+#include "posix.h"
 
 List newList() {
     List list = malloc(sizeof(struct List));
@@ -197,7 +198,7 @@ List copy(List l) {
 		newN->out = l->curr->out;
 		newN->val = l->curr->val;
 		newN->rankVal= l->curr->rankVal;
-		newN->url = strdup(l->curr->url);
+		newN->url = nStrdup(l->curr->url);
 		l->curr = l->curr->next;
 		add(cpy, newN);
 	}

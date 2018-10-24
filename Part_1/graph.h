@@ -3,6 +3,7 @@
 
 #ifndef GRAPH_H
 #define GRAPH_H
+#include "posix.h"
 
 typedef struct GraphRep *Graph;
 

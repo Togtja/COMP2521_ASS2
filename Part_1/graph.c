@@ -6,6 +6,7 @@
 #include <assert.h>
 #include <string.h>
 #include "graph.h"
+#include "posix.h"
 
 #define strEQ(g,t) (strcmp((g),(t)) == 0)
 
@@ -160,6 +161,6 @@ int vertexID(char *str, char **names, int N)
 // - add Str at end of Names
 int addVertex(char *str, char **names, int N)
 {
-	names[N] = strdup(str);
+	names[N] = nStrdup(str);
 	return N;
 }

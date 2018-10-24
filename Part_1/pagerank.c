@@ -8,6 +8,7 @@
 #include <math.h>
 #include "BSTree.h"
 #include "invertedIndex.h"
+#include "posix.h"
 
 void pageRankCalc(List l, double damp, double diffPR, int it);
 float W_in(List l, struct node * src, struct node *p1);

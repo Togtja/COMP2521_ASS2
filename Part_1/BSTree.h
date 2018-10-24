@@ -3,6 +3,7 @@
 #define BSTREE_H
 #include <stdio.h>
 #include "readData.h"
+#include "posix.h"
 
 typedef struct BSTNode *BSTree;
 
