@@ -9,4 +9,8 @@ void stringToLower(char* str);
 void removeNonLetters(char* str);
 //returns the normal of the string
 char* normalise(const char * str);
+//Set the PR values from a file
+void PRList(List list);
+//Makes a file into a list
+List fileToList(char* find);
 #endif
