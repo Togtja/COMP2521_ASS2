@@ -1,8 +1,7 @@
 #ifndef INVERTED_INDEX_H
 #define INVERTED_INDEX_H
-#include "BSTree.h"
 #include "posix.h"
-void invIndexBuilder(List l, BSTree t);
+void invIndexBuilder(List l);
 //changes the pointer to lower
 void stringToLower(char* str);
 //removes ',' '.' ':' '?' from string

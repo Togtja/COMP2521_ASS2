@@ -3,7 +3,6 @@
 #include <string.h>
 #include <ctype.h>
 #include <math.h>
-#include "BSTree.h"
 #include "readData.h"
 #include "invertedIndex.h"
 #include "posix.h"
@@ -25,7 +24,7 @@ int main(int argc, char* argv[]) {
 	//float IDF = log10f((float)numDocs / (float)bigBoy->size);
 	bigBoy->curr = bigBoy->head;
 	while (bigBoy->curr != NULL) {
-		
+
 		int j;
 		for ( j = 1; j < argc; j++) {
 			//struct node * currtmp = bigBoy->curr;
@@ -35,7 +34,7 @@ int main(int argc, char* argv[]) {
 			float TFvalue = TFsearchUrl(bigBoy->curr->url, argv[j]);
 			bigBoy->curr->TfIdfValue += TFvalue * IDF;
 		}
-		
+
 		bigBoy->curr = bigBoy->curr->next;
 	}
 	BubbleSortListTFIDF(bigBoy);
@@ -44,6 +43,7 @@ int main(int argc, char* argv[]) {
 	printList(bigBoy);
 	char q = getchar();
 	putchar(q);
+    return EXIT_SUCCESS;
 }
 float TFsearchUrl(char* url, char* word) {
 	int numOfWrd = 0; int numTotal = 0;
@@ -69,7 +69,7 @@ float TFsearchUrl(char* url, char* word) {
 			continue;
 		}
 		if (s2flag == 4) {
-			
+
 			if (strcmp(cmp, word) == 0) {
 				numOfWrd++;
 			}
@@ -77,7 +77,7 @@ float TFsearchUrl(char* url, char* word) {
 		}
 		free(cmp);
 	}
-	
+
 	fclose(fp);
 	if (numTotal == 0) {
 		return 0;
@@ -92,7 +92,6 @@ List numOfDocumets() {
 	}
 	List urlList = newList();
 	char str[100];
-	int i = 0;
 	while (fscanf(fp, "%s", str) != EOF) {
 		insertList(str, urlList);
 	}
