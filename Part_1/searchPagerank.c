@@ -36,32 +36,37 @@ void PRList(List list);
 int main(int argc, char* argv[]) {
 
 	char* find[] = {
-		"mars",
+		"jupiter",
 		"japan",
 		"intelligent",
+		"jupitor",
 	};
-	int c = 3;
+	int c = 4;
 	int i;
-	List* list = malloc(c * sizeof(List));
+	//List* list = malloc(c * sizeof(List));
+	List main;
 	for (i = 0; i < c; i++) {
-		list[i] = fileToList(find[i]);
-		printf("\nDOES IT WORK\n\n");
-		printList(list[i]);
+		if (i == 0) {
+			main = fileToList(find[i]);
+		}
+		else {
+			List list = fileToList(find[i]);
+			mergeList(main, list);//merge free second argument
+		}
 	}
-	List cmp = list[0];
-	for (int i = 1; i < c; i++) {
-		cmp = mergeList(cmp, list[i]);
-	}
+
 	//DELETE LIST OF LIST
 	printf("\n\nMERGED: \n");
-	printList(cmp);
+	printList(main);
 
-	printf("\n\nSORTED??\n\n");
-	PRList(cmp);
-	BubbleSortListPR(cmp);
-	BubbleSortListRV(cmp);
+	printf("\n\nRPList\n\n");
+	PRList(main);
+	printf("\n\nSortListPR\n\n");
+	BubbleSortListPR(main);
+	printf("\n\nSortListRV\n\n");
+	BubbleSortListRV(main);
 	//BubbleSortListRV(cmp);
-	printList(cmp);
+	printList(main);
 	//List list = fileToList(find);
 	//List list2 = fileToList(find2);
 	/*
@@ -80,7 +85,7 @@ int main(int argc, char* argv[]) {
 	PRList(list);
 	printList(list);
 	*/
-	printf("\n\nSORTED??\n\n");
+	//printf("\n\nSORTED??\n\n");
 	//List list1 = BubbleSortListPR(list);
 	//List list3 = BubbleSortListRV(list1);
 	//printList(list3);
@@ -94,10 +99,10 @@ int main(int argc, char* argv[]) {
 }
 void PRList(List list) {
 	FILE* fp = fopen("pagerankList.txt", "r");
-	int i; char str3[100];
+	char str3[100];
 	list->curr = list->head;
 	while (list->curr != NULL) {
-		while (fscanf(fp, "%s", str3) != NULL) {
+		while (fscanf(fp, "%s", str3) != -1) {
 			char* strp = str3;
 			removeNonLetters(strp);
 			if (strcmp(strp, list->curr->url) == 0) {
@@ -111,8 +116,8 @@ void PRList(List list) {
 				fscanf(fp, "%s", str3);
 				fscanf(fp, "%s", str3);
 			}
-
 		}
+		rewind(fp);
 		list->curr = list->curr->next;
 	}
 	fclose(fp);
@@ -146,9 +151,11 @@ List fileToList(char* find) {
 			url1 = url2;//url1 point to the beginning of the next url
 			url2 = strstr(&url2[1], " ");//url2 point to the end of the next url
 		}
+		fclose(fp);
+		return list;
 	}
-	fclose(fp);
-	return list;
+	printf("Could not find the word");
+	return NULL;
 }
 List mergeList(List l1, List l2) {
 	l2->curr = l2->head;
@@ -163,7 +170,7 @@ List mergeList(List l1, List l2) {
 			}
 			l1->curr = l1->curr->next;
 		}
-		if (inside == 0) {
+		if (inside == 0 && l1->size <= 30) {
 			//add l2->curr to l1;
 			insertList(l2->curr->url, l1);
 		}
