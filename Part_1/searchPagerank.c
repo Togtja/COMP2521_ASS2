@@ -4,29 +4,7 @@
 #include "readData.h"
 #include "invertedIndex.h"
 #include "pagerank.h"
-/*
-printf("\nCAN WE FIND MARS:\n\n");
-List list = findInBSTree(t, "mars");
-if (list == NULL) printf("FAKE NEWS\n");
-else printList(list);
 
-
-List findInBSTree(BSTree t, char* str) {
-	if (t == NULL) {
-		return NULL;
-	}
-	char* search = normalise(str);
-	if (strcmp(search, t->key) == 0) {
-		printf("WE FOUND IT!!!");
-		return t->urlList;
-	}
-	free(search);
-	List ret = findInBSTree(t->left, str);
-	if (ret != NULL) {
-		return ret;
-	}
-	return findInBSTree(t->right, str);
-}*/
 void BubbleSortListPR(List l);
 void BubbleSortListRV(List l);
 List mergeList(List l1, List l2);
@@ -52,8 +30,6 @@ int main(int argc, char* argv[]) {
 		List list = fileToList(argv[i]);
 		mergeList(main, list);//merge free second argument
 	}
-
-	//DELETE LIST OF LIST
 	printf("\n\nMERGED: \n");
 	printList(main);
 
@@ -63,7 +39,6 @@ int main(int argc, char* argv[]) {
 	BubbleSortListPR(main);
 	printf("\n\nSortListRV\n\n");
 	BubbleSortListRV(main);
-	//BubbleSortListRV(cmp);
 	printList(main);
 	char k = getchar();
 	putchar(k);
@@ -143,7 +118,6 @@ List mergeList(List l1, List l2) {
 			l1->curr = l1->curr->next;
 		}
 		if (inside == 0 && l1->size <= 30) {
-			//add l2->curr to l1;
 			insertList(l2->curr->url, l1);
 		}
 		l2->curr = l2->curr->next;
@@ -161,7 +135,6 @@ void BubbleSortListPR(List ret) {
 		printf("List is 1");
 		return;
 	}
-	//List ret = copy(l);
 	struct node * prv = NULL;
 	struct node * cmp1 = ret->head;
 	struct node * cmp2 = ret->head->next;
@@ -192,7 +165,6 @@ void BubbleSortListPR(List ret) {
 			cmp2 = ret->head->next;
 		}
 	}
-	//return ret;
 }
 void BubbleSortListRV(List ret) {
 	if (ret == NULL) {
@@ -203,7 +175,6 @@ void BubbleSortListRV(List ret) {
 		printf("List is 1");
 		return;
 	}
-	//List ret = copy(l);
 	struct node * prv = NULL;
 	struct node * cmp1 = ret->head;
 	struct node * cmp2 = ret->head->next;
@@ -234,5 +205,4 @@ void BubbleSortListRV(List ret) {
 			cmp2 = ret->head->next;
 		}
 	}
-	//return ret;
 }

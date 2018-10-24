@@ -57,10 +57,6 @@ int main(int argc, char *argv[]) {
     return 0;
 }
 
-
-
-
-
 List BubbleSortList(List l) {
 	if (l == NULL) {
 		printf("NULL list");
