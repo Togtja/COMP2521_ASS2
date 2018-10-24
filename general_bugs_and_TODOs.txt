@@ -1,0 +1,2 @@
+Use a better stable sort than bubble sort
+free all allocated memory
