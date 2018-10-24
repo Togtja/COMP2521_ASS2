@@ -220,3 +220,118 @@ void deleteList(List l) {
 	//free(l->curr);
 	free(l);
 }
+void BubbleSortListPR(List ret) {
+	if (ret == NULL) {
+		printf("NULL list");
+		return;
+	}
+	if (ret->size == 1) {
+		printf("List is 1");
+		return;
+	}
+	struct node * prv = NULL;
+	struct node * cmp1 = ret->head;
+	struct node * cmp2 = ret->head->next;
+	int c;
+	for (c = 0; c < ret->size * ret->size; c++) {
+		if (cmp1->val < cmp2->val) {
+			cmp1->next = cmp2->next;
+			cmp2->next = cmp1;
+			int ind = cmp1->pos;
+			cmp1->pos = cmp2->pos;
+			cmp2->pos = ind;
+			if (prv == NULL) { ret->head = cmp2; }
+			else {
+				prv->next = cmp2;
+			}
+
+			prv = cmp2;
+			cmp2 = cmp1->next;
+		}
+		else {
+			prv = cmp1;
+			cmp1 = cmp2;
+			cmp2 = cmp2->next;
+		}
+		if (cmp2 == NULL) {
+			prv = NULL;
+			cmp1 = ret->head;
+			cmp2 = ret->head->next;
+		}
+	}
+}
+void BubbleSortListRV(List ret) {
+	if (ret == NULL) {
+		printf("NULL list");
+		return;
+	}
+	if (ret->size == 1) {
+		printf("List is 1");
+		return;
+	}
+	struct node * prv = NULL;
+	struct node * cmp1 = ret->head;
+	struct node * cmp2 = ret->head->next;
+	int c;
+	for (c = 0; c < ret->size * ret->size; c++) {
+		if (cmp1->rankVal < cmp2->rankVal) {
+			cmp1->next = cmp2->next;
+			cmp2->next = cmp1;
+			int ind = cmp1->pos;
+			cmp1->pos = cmp2->pos;
+			cmp2->pos = ind;
+			if (prv == NULL) { ret->head = cmp2; }
+			else {
+				prv->next = cmp2;
+			}
+
+			prv = cmp2;
+			cmp2 = cmp1->next;
+		}
+		else {
+			prv = cmp1;
+			cmp1 = cmp2;
+			cmp2 = cmp2->next;
+		}
+		if (cmp2 == NULL) {
+			prv = NULL;
+			cmp1 = ret->head;
+			cmp2 = ret->head->next;
+		}
+	}
+}
+void printListToFile(List l, char* fileName) {
+	l->curr = l->head;
+	FILE *fp = fopen(fileName, "w");
+	if (fp == NULL) {
+		printf("Something wrong happened\n");
+		fclose(fp);
+		return;
+	}
+	while (l->curr != NULL) {
+		fprintf(fp, "%s, %d, %.7f\n", l->curr->url, l->curr->out, l->curr->val);
+		l->curr = l->curr->next;
+	}
+	fclose(fp);
+}
+List mergeList(List l1, List l2) {
+	l2->curr = l2->head;
+	while (l2->curr != NULL) {
+		l1->curr = l1->head;
+		int inside = 0;
+		while (l1->curr != NULL) {
+			if (strcmp(l1->curr->url, l2->curr->url) == 0) {
+				l1->curr->rankVal++;
+				inside = 1;
+				break;
+			}
+			l1->curr = l1->curr->next;
+		}
+		if (inside == 0 && l1->size <= 30) {
+			insertList(l2->curr->url, l1);
+		}
+		l2->curr = l2->curr->next;
+	}
+	deleteList(l2);
+	return l1;
+}

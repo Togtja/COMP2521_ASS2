@@ -43,4 +43,12 @@ void initPR(List l);
 List copy(List l);
 //deltes list
 void deleteList(List l);
+//Bubblesort the PR values
+void BubbleSortListPR(List ret);
+//Bubble sort the Rank Values
+void BubbleSortListRV(List ret);
+//prints a list to a file
+void printListToFile(List l, char* fileName);
+//merges two list and frees the second agrument/list
+List mergeList(List l1, List l2);
 #endif

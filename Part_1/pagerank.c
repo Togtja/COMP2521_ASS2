@@ -1,3 +1,4 @@
+/*
 #include <stdlib.h>
 #include <stdio.h>
 #include <string.h>
@@ -13,8 +14,6 @@
 void pageRankCalc(List l, double damp, double diffPR, int it);
 float W_in(List l, struct node * src, struct node *p1);
 float W_out(List l, struct node * src, struct node *p1);
-List BubbleSortList(List l);
-void printListToFile(List l, char* fileName);
 
 int main(int argc, char *argv[]) {
 
@@ -43,76 +42,19 @@ int main(int argc, char *argv[]) {
 	pageRankCalc(url_list, d, diffPR, maxIterations);
     printList(url_list);
 
-	List sort = BubbleSortList(url_list);
+	BubbleSortListPR(url_list);
 	printf("\nSORTED LIST:\n\n");
-	printList(sort);
-	printListToFile(sort, "pagerankList.txt");
+	printList(url_list);
+	printListToFile(url_list, "pagerankList.txt");
 
 	printf("\nBSTree:\n\n");
 	BSTree BST = newBSTree();
-	invIndexBuilder(sort, BST);
+	invIndexBuilder(url_list, BST);
 
 
 	char c = getchar();
 	putchar(c);
     return 0;
-}
-
-List BubbleSortList(List l) {
-	if (l == NULL) {
-		printf("NULL list");
-			return l;
-	}
-	if (l->size == 1) {
-		printf("List is 1 ");
-		return l;
-	}
-	List ret = copy(l);
-	struct node * prv = NULL;
-	struct node * cmp1 = ret->head;
-	struct node * cmp2 = ret->head->next;
-	int c;
-	for (c = 0; c < ret->size * ret->size; c++) {
-		if (cmp1->val < cmp2->val) {
-			cmp1->next = cmp2->next;
-			cmp2->next = cmp1;
-			int ind = cmp1->pos;
-			cmp1->pos = cmp2->pos;
-			cmp2->pos = ind;
-			if (prv == NULL) { ret->head = cmp2; }
-			else {
-				prv->next = cmp2;
-			}
-
-			prv = cmp2;
-			cmp2 = cmp1->next;
-		}
-		else {
-			prv = cmp1;
-			cmp1 = cmp2;
-			cmp2 = cmp2->next;
-		}
-		if (cmp2 == NULL) {
-			prv = NULL;
-			cmp1 = ret->head;
-			cmp2 = ret->head->next;
-		}
-	}
-	return ret;
-}
-void printListToFile(List l, char* fileName) {
-	l->curr = l->head;
-	FILE *fp = fopen(fileName, "w");
-	if (fp == NULL) {
-		printf("Something wrong happened\n");
-		fclose(fp);
-		return;
-	}
-	while (l->curr != NULL) {
-		fprintf(fp, "%s, %d, %.7f\n", l->curr->url, l->curr->out, l->curr->val);
-		l->curr = l->curr->next;
-	}
-	fclose(fp);
 }
 void pageRankCalc(List l, double damp, double diffPR, int it) {
 	int i = 0; double diff = diffPR; l->curr = l->head;
@@ -182,3 +124,4 @@ float W_out(List l, struct node * src, struct node *p1) {
 	}
 	return p1->out / (sum);
 }
+*/
