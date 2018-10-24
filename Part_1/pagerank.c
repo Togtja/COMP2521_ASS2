@@ -62,8 +62,12 @@ int main(int argc, char *argv[]) {
 
 
 List BubbleSortList(List l) {
-	if (l->head == NULL || l->head->next == NULL || l->size <= 3) {
-		printf("List is smaller 3 or less");
+	if (l == NULL) {
+		printf("NULL list");
+			return l;
+	}
+	if (l->size == 1) {
+		printf("List is 1 ");
 		return l;
 	}
 	List ret = copy(l);
@@ -144,6 +148,7 @@ void pageRankCalc(List l, double damp, double diffPR, int it) {
 		l->curr = l->head;
 		temp->curr = temp->head;
 	}
+	free(temp);
 }
 
 float W_in(List l, struct node * src, struct node *p1) {

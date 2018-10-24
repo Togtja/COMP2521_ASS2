@@ -122,22 +122,29 @@ List fileToList(char* find) {
 	FILE* fp = fopen("invertedIndex.txt", "r");
 	char str[1000];
 	List list = newList();
-
+	//get the first line
 	while (fgets(str, 1000, fp) != NULL) {
 		char* word = strstr(str, find);
+		//if the word we are looking for isn't in the line,
 		if (word == NULL) {
+			//go to the next line
 			continue;
 		}
+		//We have found the word
 		char* url1 = strstr(word, " ");
-		url1 = strstr(&url1[1], " ");
+		//url1 points 2 the beginning of all the urls
+		url1 = strstr(&url1[1], " "); //there is 2 space after the words
+		//url2 points at the end of the first url
 		char* url2 = strstr(&url1[2], " ");
+		//While not the end of the line
 		while (url2 != NULL) {
+			//copy the url into theUrl
 			char* theUrl = malloc(strlen(url1) - strlen(url2));
 			theUrl = memcpy(theUrl, &url1[1], strlen(url1) - strlen(url2) - 1);
 			theUrl[strlen(url1) - strlen(url2) - 1] = '\0';
-			insertList(theUrl, list);
-			url1 = url2;
-			url2 = strstr(&url2[1], " ");
+			insertList(theUrl, list);//insert the url into a new list
+			url1 = url2;//url1 point to the beginning of the next url
+			url2 = strstr(&url2[1], " ");//url2 point to the end of the next url
 		}
 	}
 	fclose(fp);
@@ -167,8 +174,12 @@ List mergeList(List l1, List l2) {
 }
 
 void BubbleSortListPR(List ret) {
-	if (ret->head == NULL || ret->head->next == NULL || ret->size <= 3) {
-		printf("List is smaller 3 or less");
+	if (ret == NULL) {
+		printf("NULL list");
+		return;
+	}
+	if (ret->size == 1) {
+		printf("List is 1");
 		return;
 	}
 	//List ret = copy(l);
@@ -205,8 +216,12 @@ void BubbleSortListPR(List ret) {
 	//return ret;
 }
 void BubbleSortListRV(List ret) {
-	if (ret->head == NULL || ret->head->next == NULL || ret->size <= 3) {
-		printf("List is smaller 3 or less");
+	if (ret == NULL) {
+		printf("NULL list");
+		return;
+	}
+	if (ret->size == 1) {
+		printf("List is 1");
 		return;
 	}
 	//List ret = copy(l);
