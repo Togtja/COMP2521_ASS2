@@ -34,7 +34,9 @@ List fileToList(char* find);
 void PRList(List list);
 
 int main(int argc, char* argv[]) {
-
+	for (int i = 1; i < argc; i++) {
+		printf("%s", argv[i]);
+	}
 	char* find[] = {
 		"jupiter",
 		"japan",
@@ -42,17 +44,13 @@ int main(int argc, char* argv[]) {
 		"jupitor",
 	};
 	int c = 4;
-	int i;
+
 	//List* list = malloc(c * sizeof(List));
-	List main;
-	for (i = 0; i < c; i++) {
-		if (i == 0) {
-			main = fileToList(find[i]);
-		}
-		else {
-			List list = fileToList(find[i]);
-			mergeList(main, list);//merge free second argument
-		}
+	int i;
+	List main = fileToList(argv[1]);
+	for (i = 2; i < argc; i++) {
+		List list = fileToList(argv[i]);
+		mergeList(main, list);//merge free second argument
 	}
 
 	//DELETE LIST OF LIST
@@ -67,32 +65,6 @@ int main(int argc, char* argv[]) {
 	BubbleSortListRV(main);
 	//BubbleSortListRV(cmp);
 	printList(main);
-	//List list = fileToList(find);
-	//List list2 = fileToList(find2);
-	/*
-
-	printList(list);
-	printf("\n\nDIFFRENT\n\n");
-	printList(list2);
-
-	printf("\n\nMERGED: \n");
-	mergeList(list, list2);
-	printList(list);
-
-
-
-	printf("\n\nValued: \n");
-	PRList(list);
-	printList(list);
-	*/
-	//printf("\n\nSORTED??\n\n");
-	//List list1 = BubbleSortListPR(list);
-	//List list3 = BubbleSortListRV(list1);
-	//printList(list3);
-		
-	
-
-
 	char k = getchar();
 	putchar(k);
 	return 0;
