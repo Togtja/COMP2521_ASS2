@@ -2,7 +2,7 @@
 #include <stdlib.h> 
 #include <math.h>
 #include <string.h>
-#include "readData.h"
+#include "readData_SFR.h"
 
 float scaledFootRuleCalc(int c, int t, int p, int n);
 void perm(int v[], int n, int i, List * lists, List unionL, int ts, int* result);

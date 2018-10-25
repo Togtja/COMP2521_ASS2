@@ -1,7 +1,7 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <string.h>
-#include "readData.h"
+#include "readData_SFR.h"
 #include "posix.h"
 
 List newList() {
