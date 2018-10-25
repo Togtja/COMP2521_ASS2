@@ -1,7 +1,6 @@
 // Queue.h ... implementation of Queue ADT
 // assumes that Item is an assignable type
 // (e.g. int, pointer) defined in Queue.h
-
 #include <stdlib.h>
 #include <stdio.h>
 #include <assert.h>

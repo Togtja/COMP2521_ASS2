@@ -4,7 +4,6 @@
 #include <string.h>
 #include "readData.h"
 #include "graph.h"
-#include "pagerank.h"
 #include <math.h>
 #include "BSTree.h"
 #include "invertedIndex.h"
