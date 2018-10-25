@@ -17,12 +17,12 @@ List newList() {
 
 void printList(List l) {
 
-    l->curr = l->head;
-    while (l->curr != NULL) {
+	l->curr = l->head; int i = 0;
+    while (l->curr != NULL && i <= 30) {
 		//printf("%s: weight: %d ins: %d outs: %d value: %.7f\n", l->curr->url, l->curr->pos, l->curr->in, l->curr->out, l->curr->val);
 		//printf("Ranked Value: %d\n", l->curr->rankVal);
 		printf("%s\n", l->curr->url);
-		l->curr = l->curr->next;
+		l->curr = l->curr->next; i++;
     }
 }
 
@@ -376,7 +376,7 @@ List mergeList(List l1, List l2) {
 			}
 			l1->curr = l1->curr->next;
 		}
-		if (inside == 0 && l1->size <= 30) {
+		if (inside == 0) {
 			insertList(l2->curr->url, l1);
 		}
 		l2->curr = l2->curr->next;

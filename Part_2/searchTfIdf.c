@@ -45,6 +45,8 @@ int main(int argc, char* argv[]) {
 	BubbleSortListTFIDF__Tfldf(bigBoy);
 	BubbleSortListRV__Tfldf(bigBoy);
 
+
+
 	printList_Tfldf(bigBoy);
     deleteList__Tfldf(urls);
     deleteList__Tfldf(bigBoy);

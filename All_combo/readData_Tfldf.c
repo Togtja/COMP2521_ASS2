@@ -14,10 +14,10 @@ List_Tfldf newList_Tfldf() {
 
 void printList_Tfldf(List_Tfldf l) {
 
-    l->curr = l->head;
-    while (l->curr != NULL) {
+	l->curr = l->head; int i = 0;
+    while (l->curr != NULL && i <= 30) {
 		printf("%s  %.6f\n", l->curr->url, l->curr->TfIdfValue);
-		l->curr = l->curr->next;
+		l->curr = l->curr->next; i++;
     }
 }
 
@@ -235,7 +235,7 @@ List_Tfldf mergeList__Tfldf(List_Tfldf l1, List_Tfldf l2) {
 			}
 			l1->curr = l1->curr->next;
 		}
-		if (inside == 0 && l1->size <= 30) {
+		if (inside == 0) {
 			insertList__Tfldf(l2->curr->url, l1);
 		}
 		l2->curr = l2->curr->next;

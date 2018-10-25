@@ -150,7 +150,7 @@ List_SFR mergeList_SFR(List_SFR l1, List_SFR l2) {
 			}
 			l1->curr = l1->curr->next;
 		}
-		if (inside == 0 && l1->size <= 30) {
+		if (inside == 0) {
 			insertList_SFR(l2->curr->url, l1);
 		}
 		l2->curr = l2->curr->next;
