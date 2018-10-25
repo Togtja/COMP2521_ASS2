@@ -49,7 +49,8 @@ int main(int argc, char *argv[]) {
 	printf("\nBSTree:\n\n");
 	BSTree BST = newBSTree();
 	invIndexBuilder(url_list, BST);
-
+    deleteList(url_list);
+    dropBSTree(BST);
 
 	char c = getchar();
 	putchar(c);

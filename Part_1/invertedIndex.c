@@ -46,6 +46,7 @@ void invIndexBuilder (List l, BSTree t) {
 		exit(-1);
 	}
 	writeBSTree(t, fp);
+    dropBSTree(t);
 	fclose(fp);
 }
 void stringToLower(char *str) {

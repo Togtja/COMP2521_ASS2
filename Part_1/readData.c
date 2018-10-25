@@ -11,6 +11,7 @@ List newList() {
     List list = malloc(sizeof(struct List));
     list->head = NULL;
     list->curr = NULL;
+    list->graph = NULL;
     list->size = 0;
     return list;
 }
@@ -212,7 +213,7 @@ List copy(List l) {
 }
 
 void deleteList(List l) {
-	l->head = l->curr;
+	l->curr = l->head;
 	while (l->curr != NULL) {
 		struct node* remv = l->curr;
 		l->curr = l->curr->next;
@@ -221,6 +222,8 @@ void deleteList(List l) {
 	}
 	//free(l->curr->url);
 	//free(l->curr);
+    if (l->graph != NULL)
+        disposeGraph(l->graph);
 	free(l);
 }
 void BubbleSortListPR(List ret) {
