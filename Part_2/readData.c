@@ -132,7 +132,7 @@ List copy(List l) {
 }
 
 void deleteList(List l) {
-	l->head = l->curr;
+	l->curr = l->head;
 	while (l->curr != NULL) {
 		struct node* remv = l->curr;
 		l->curr = l->curr->next;
@@ -144,11 +144,11 @@ void deleteList(List l) {
 
 void BubbleSortListRV(List ret) {
 	if (ret == NULL) {
-		printf("NULL list");
+		//printf("NULL list");
 		return;
 	}
 	if (ret->size == 1) {
-		printf("List is 1");
+		//printf("List is 1");
 		return;
 	}
 	struct node * prv = NULL;
@@ -184,11 +184,11 @@ void BubbleSortListRV(List ret) {
 }
 void BubbleSortListTFIDF(List ret) {
 	if (ret == NULL) {
-		printf("NULL list");
+		//printf("NULL list");
 		return;
 	}
 	if (ret->size == 1) {
-		printf("List is 1");
+		//printf("List is 1");
 		return;
 	}
 	struct node * prv = NULL;

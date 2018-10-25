@@ -1,2 +1,4 @@
 Use a better stable sort than bubble sort
 free all allocated memory
+fix readData in part two as it prints out while Bubblesorting
+in extreme occasions (0,1)

@@ -6,6 +6,7 @@
 #include "graph.h"
 #include "posix.h"
 
+void BubbleSortListSC(List ret);
 List newList() {
     List list = malloc(sizeof(struct List));
     list->head = NULL;
@@ -37,6 +38,8 @@ void printOnlyUrls(List L) {
 
 void fprintOnlyUrls(List L, FILE *fp) {
 
+
+    BubbleSortListSC(L);
     struct node *ptr = L->head;
     while (ptr != NULL) {
         fprintf(fp, "%s ", ptr->url);
@@ -300,6 +303,48 @@ void BubbleSortListRV(List ret) {
 		}
 	}
 }
+
+void BubbleSortListSC(List ret) {
+	if (ret == NULL) {
+		//printf("NULL list");
+		return;
+	}
+	if (ret->size == 1) {
+		//printf("List is 1");
+		return;
+	}
+	struct node * prv = NULL;
+	struct node * cmp1 = ret->head;
+	struct node * cmp2 = ret->head->next;
+	int c;
+	for (c = 0; c < ret->size * ret->size; c++) {
+		if (strcmp(cmp1->url, cmp2->url) > 0) {
+			cmp1->next = cmp2->next;
+			cmp2->next = cmp1;
+			int ind = cmp1->pos;
+			cmp1->pos = cmp2->pos;
+			cmp2->pos = ind;
+			if (prv == NULL) { ret->head = cmp2; }
+			else {
+				prv->next = cmp2;
+			}
+
+			prv = cmp2;
+			cmp2 = cmp1->next;
+		}
+		else {
+			prv = cmp1;
+			cmp1 = cmp2;
+			cmp2 = cmp2->next;
+		}
+		if (cmp2 == NULL) {
+			prv = NULL;
+			cmp1 = ret->head;
+			cmp2 = ret->head->next;
+		}
+	}
+}
+
 void printListToFile(List l, char* fileName) {
 	l->curr = l->head;
 	FILE *fp = fopen(fileName, "w");
