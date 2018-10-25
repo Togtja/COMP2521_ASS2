@@ -52,6 +52,9 @@ int main(int argc, char *argv[]) {
     deleteList(url_list);
     dropBSTree(BST);
 
+	deleteList(url_list);
+	disposeGraph(BST);
+
 	char c = getchar();
 	putchar(c);
     return 0;
