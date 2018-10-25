@@ -22,7 +22,7 @@ int main(int argc, char* argv[]) {
 	for (i = 2; i < argc; i++) {
 		List_Tfldf list = fileToList(argv[i]);
 //        printList(list);
-		mergeList(bigBoy, list);
+		mergeList__Tfldf(bigBoy, list);
 	}
 	List_Tfldf urls = numOfDocumets();
 	//float IDF = log10f((float)numDocs / (float)bigBoy->size);
@@ -42,12 +42,12 @@ int main(int argc, char* argv[]) {
 
 		bigBoy->curr = bigBoy->curr->next;
 	}
-	BubbleSortListTFIDF(bigBoy);
-	BubbleSortListRV(bigBoy);
+	BubbleSortListTFIDF__Tfldf(bigBoy);
+	BubbleSortListRV__Tfldf(bigBoy);
 
-	printList(bigBoy);
-    deleteList(urls);
-    deleteList(bigBoy);
+	printList_Tfldf(bigBoy);
+    deleteList__Tfldf(urls);
+    deleteList__Tfldf(bigBoy);
     return EXIT_SUCCESS;
 }
 float TFsearchUrl(char* url, char* word) {
@@ -65,7 +65,7 @@ float TFsearchUrl(char* url, char* word) {
 	char str[100];
 	int s2flag = 0;
 	while (fscanf(fp, "%s", str) != EOF) {
-		char* cmp = normalise(str);
+		char* cmp = normalise_Part2(str);
 		if (strstr(str, "#start") || strstr(str, "#end")) {
 			s2flag++;
 		}
@@ -97,10 +97,10 @@ List_Tfldf numOfDocumets() {
 		printf("Could not find collection.txt");
 		exit(-1);
 	}
-	List_Tfldf urlList = newList();
+	List_Tfldf urlList = newList_Tfldf();
 	char str[100];
 	while (fscanf(fp, "%s", str) != EOF) {
-		insertList(str, urlList);
+		insertList__Tfldf(str, urlList);
 	}
 	return urlList;
 }
@@ -122,7 +122,7 @@ List_Tfldf fileToList(char* find) {
 		exit(-1);
 	}
 	char str[1000];
-	List_Tfldf list = newList();
+	List_Tfldf list = newList_Tfldf();
 	//get the first line
 	while (fgets(str, 1000, fp) != NULL) {
 		//	    printf("%s\n", str);
@@ -149,7 +149,7 @@ List_Tfldf fileToList(char* find) {
 			char* theUrl = malloc(strlen(url1) - strlen(url2));
 			theUrl = memcpy(theUrl, &url1[1], strlen(url1) - strlen(url2) - 1);
 			theUrl[strlen(url1) - strlen(url2) - 1] = '\0';
-			insertList(theUrl, list);//insert the url into a new list
+			insertList__Tfldf(theUrl, list);//insert the url into a new list
 			url1 = url2;//url1 point to the beginning of the next url
 			url2 = strstr(&url2[1], " ");//url2 point to the end of the next url
 			free(theUrl);

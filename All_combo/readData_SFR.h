@@ -20,20 +20,20 @@ struct List_SFR {
 typedef struct List_SFR *List_SFR;
 
 
-List_SFR newList();
+List_SFR newList_SFR();
 
-void printList(List_SFR L);
+void printList_SFR(List_SFR L);
 
-void printOnlyUrls(List_SFR L);
-void fprintOnlyUrls(List_SFR L, FILE *fp);
+void printOnlyUrls_SFR(List_SFR L);
+void fprintOnlyUrls_SFR(List_SFR L, FILE *fp);
 
-void insertList(char str[], List_SFR L);
+void insertList_SFR(char str[], List_SFR L);
 
-void listOfUrls(char file[], List_SFR l);
+void listOfUrls_SFR(char file[], List_SFR l);
 //Copies lists
-List_SFR copy(List_SFR l);
+List_SFR copy_SFR(List_SFR l);
 //deltes list
-void deleteList(List_SFR l);
+void deleteList_SFR(List_SFR l);
 //merges two list and frees the second agrument/list
-List_SFR mergeList(List_SFR l1, List_SFR l2);
+List_SFR mergeList_SFR(List_SFR l1, List_SFR l2);
 #endif

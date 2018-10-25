@@ -15,15 +15,15 @@ int main(int argc, char* argv[]) {
 	
 	//Somehow this lose 16 bytes of memory
 	List_SFR * tList = malloc(sizeof(List_SFR) * (argc - 1));
-	tList[0] = copy(listUnion);
+	tList[0] = copy_SFR(listUnion);
 	int bigT = tList[0]->size;//set list 0 to be the biggest list (for now) 
 	int i;
 	for (i = 2; i < argc; i++) {
 		List_SFR temp = listFromFile(argv[i]);
 		//if find bigger list, then set that as biggest list
 		if (temp->size > bigT) bigT = temp->size;
-		tList[i - 1] = copy(temp);
-		mergeList(listUnion, temp); //Frees temp
+		tList[i - 1] = copy_SFR(temp);
+		mergeList_SFR(listUnion, temp); //Frees temp
 	}	
 	int * p = malloc(sizeof(int) * bigT);
 	int* result = malloc(sizeof(int) * listUnion->size);
@@ -53,10 +53,10 @@ int main(int argc, char* argv[]) {
 		}
 
 	}
-	deleteList(listUnion);
+	deleteList_SFR(listUnion);
 	//I though this was correctly freeing the memory?
 	for (i = 0; i < argc-1; i++) {
-		deleteList(tList[i]);
+		deleteList_SFR(tList[i]);
 	}
 	free(p);
 	free(result);
@@ -128,7 +128,7 @@ void perm(int v[], int n, int i, List_SFR * lists, List_SFR unionL, int ts, int*
 		}
 }
 List_SFR listFromFile(char* file) {
-	List_SFR list= newList();
+	List_SFR list= newList_SFR();
 	FILE* fp = fopen(file, "r");
 	if (fp == NULL) {
 		printf("FAILED TO OPEN FILE %s\n", file);
@@ -136,7 +136,7 @@ List_SFR listFromFile(char* file) {
 	}
 	char str[100];
 	while (fscanf(fp, "%s", str) != EOF) {
-		insertList(str, list);
+		insertList_SFR(str, list);
 	}
 	fclose(fp);
 	return list;

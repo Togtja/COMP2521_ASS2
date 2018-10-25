@@ -4,7 +4,7 @@
 #include "readData_SFR.h"
 #include "posix.h"
 
-List_SFR newList() {
+List_SFR newList_SFR() {
     List_SFR list = malloc(sizeof(struct List_SFR));
     list->head = NULL;
     list->curr = NULL;
@@ -12,7 +12,7 @@ List_SFR newList() {
     return list;
 }
 
-void printList(List_SFR l) {
+void printList_SFR(List_SFR l) {
 
     l->curr = l->head;
     while (l->curr != NULL) {
@@ -21,7 +21,7 @@ void printList(List_SFR l) {
     }
 }
 
-void printOnlyUrls(List_SFR L) {
+void printOnlyUrls_SFR(List_SFR L) {
 
     struct node_SFR *ptr = L->head;
     while (ptr != NULL) {
@@ -32,7 +32,7 @@ void printOnlyUrls(List_SFR L) {
 
 }
 
-void fprintOnlyUrls(List_SFR L, FILE *fp) {
+void fprintOnlyUrls_SFR(List_SFR L, FILE *fp) {
 
     struct node_SFR *ptr = L->head;
     while (ptr != NULL) {
@@ -45,7 +45,7 @@ void fprintOnlyUrls(List_SFR L, FILE *fp) {
 
 
 
-void insertList(char str[], List_SFR L) {
+void insertList_SFR(char str[], List_SFR L) {
     struct node_SFR *link = malloc(sizeof(struct node_SFR));
     link->url = malloc(strlen(str) * sizeof(char) + 1);
     strcpy(link->url, str);
@@ -67,7 +67,7 @@ void insertList(char str[], List_SFR L) {
     L->size++;
 }
 
-void listOfUrls(char file[], List_SFR l){
+void listOfUrls_SFR(char file[], List_SFR l){
 	//Find the file
     char * filename = malloc(strlen(file) + strlen(".txt") + 1);
     strcpy(filename, file);
@@ -83,7 +83,7 @@ void listOfUrls(char file[], List_SFR l){
     //Queue q = newQueue();
     while(fscanf(fp, "%s", str) != EOF) {
         //printf("hey %s\n", str);
-        insertList(str,l);
+        insertList_SFR(str,l);
       //  QueueJoin(q, str);
     }
 
@@ -98,7 +98,7 @@ void listOfUrls(char file[], List_SFR l){
 //List getInvertedList(List urls) {
 	//Don't understand what this one is suppsed to do
 //}
-void add(List_SFR l,struct node_SFR * newN) {
+void add_SFR(List_SFR l,struct node_SFR * newN) {
 	if (l->head == NULL) {
 		l->head = newN;
 	}
@@ -111,8 +111,8 @@ void add(List_SFR l,struct node_SFR * newN) {
 	}
 	l->size++;
 }
-List_SFR copy(List_SFR l) {
-	List_SFR cpy = newList();
+List_SFR copy_SFR(List_SFR l) {
+	List_SFR cpy = newList_SFR();
 	l->curr = l->head;
 	while (l->curr != NULL) {
 		struct node_SFR *newN = malloc(sizeof(struct node_SFR));
@@ -120,12 +120,12 @@ List_SFR copy(List_SFR l) {
 		newN->pos = l->curr->pos;
 		newN->url = nStrdup(l->curr->url);
 		l->curr = l->curr->next;
-		add(cpy, newN);
+		add_SFR(cpy, newN);
 	}
 	return cpy;
 }
 
-void deleteList(List_SFR l) {
+void deleteList_SFR(List_SFR l) {
 	if (l == NULL) {
 		return;
 	}
@@ -138,7 +138,7 @@ void deleteList(List_SFR l) {
 	}
 	free(l);
 }
-List_SFR mergeList(List_SFR l1, List_SFR l2) {
+List_SFR mergeList_SFR(List_SFR l1, List_SFR l2) {
 	l2->curr = l2->head;
 	while (l2->curr != NULL) {
 		l1->curr = l1->head;
@@ -151,10 +151,10 @@ List_SFR mergeList(List_SFR l1, List_SFR l2) {
 			l1->curr = l1->curr->next;
 		}
 		if (inside == 0 && l1->size <= 30) {
-			insertList(l2->curr->url, l1);
+			insertList_SFR(l2->curr->url, l1);
 		}
 		l2->curr = l2->curr->next;
 	}
-	deleteList(l2);
+	deleteList_SFR(l2);
 	return l1;
 }

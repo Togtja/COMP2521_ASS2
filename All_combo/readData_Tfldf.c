@@ -4,7 +4,7 @@
 #include "readData_Tfldf.h"
 #include "posix.h"
 
-List_Tfldf newList() {
+List_Tfldf newList_Tfldf() {
     List_Tfldf list = malloc(sizeof(struct List_Tfldf));
     list->head = NULL;
     list->curr = NULL;
@@ -12,7 +12,7 @@ List_Tfldf newList() {
     return list;
 }
 
-void printList(List_Tfldf l) {
+void printList_Tfldf(List_Tfldf l) {
 
     l->curr = l->head;
     while (l->curr != NULL) {
@@ -21,7 +21,7 @@ void printList(List_Tfldf l) {
     }
 }
 
-void printOnlyUrls(List_Tfldf L) {
+void printOnlyUrls_Tfldf(List_Tfldf L) {
 
     struct node_Tfldf *ptr = L->head;
     while (ptr != NULL) {
@@ -32,7 +32,7 @@ void printOnlyUrls(List_Tfldf L) {
 
 }
 
-void fprintOnlyUrls(List_Tfldf L, FILE *fp) {
+void fprintOnlyUrls_Tfldf(List_Tfldf L, FILE *fp) {
 
     struct node_Tfldf *ptr = L->head;
     while (ptr != NULL) {
@@ -45,7 +45,7 @@ void fprintOnlyUrls(List_Tfldf L, FILE *fp) {
 
 
 
-void insertList(char str[], List_Tfldf L) {
+void insertList__Tfldf(char str[], List_Tfldf L) {
     struct node_Tfldf *link = malloc(sizeof(struct node_Tfldf));
     link->url = malloc(strlen(str) * sizeof(char) + 1);
     strcpy(link->url, str);
@@ -71,7 +71,7 @@ void insertList(char str[], List_Tfldf L) {
     L->size++;
 }
 
-void listOfUrls(char file[], List_Tfldf l){
+void listOfUrls__Tfldf(char file[], List_Tfldf l){
 	//Find the file
     char * filename = malloc(strlen(file) + strlen(".txt") + 1);
     strcpy(filename, file);
@@ -87,7 +87,7 @@ void listOfUrls(char file[], List_Tfldf l){
     //Queue q = newQueue();
     while(fscanf(fp, "%s", str) != EOF) {
         //printf("hey %s\n", str);
-        insertList(str,l);
+        insertList__Tfldf(str,l);
       //  QueueJoin(q, str);
     }
 
@@ -102,7 +102,7 @@ void listOfUrls(char file[], List_Tfldf l){
 //List getInvertedList(List urls) {
 	//Don't understand what this one is suppsed to do
 //}
-void add(List_Tfldf l,struct node_Tfldf * newN) {
+void add__Tfldf(List_Tfldf l,struct node_Tfldf * newN) {
 	if (l->head == NULL) {
 		l->head = newN;
 	}
@@ -115,8 +115,8 @@ void add(List_Tfldf l,struct node_Tfldf * newN) {
 	}
 	l->size++;
 }
-List_Tfldf copy(List_Tfldf l) {
-	List_Tfldf cpy = newList();
+List_Tfldf copy__Tfldf(List_Tfldf l) {
+	List_Tfldf cpy = newList_Tfldf();
 	l->curr = l->head;
 	while (l->curr != NULL) {
 		struct node_Tfldf *newN = malloc(sizeof(struct node_Tfldf));
@@ -126,12 +126,12 @@ List_Tfldf copy(List_Tfldf l) {
 		newN->rankVal= l->curr->rankVal;
 		newN->url = nStrdup(l->curr->url);
 		l->curr = l->curr->next;
-		add(cpy, newN);
+		add__Tfldf(cpy, newN);
 	}
 	return cpy;
 }
 
-void deleteList(List_Tfldf l) {
+void deleteList__Tfldf(List_Tfldf l) {
 	l->curr = l->head;
 	while (l->curr != NULL) {
 		struct node_Tfldf* remv = l->curr;
@@ -142,7 +142,7 @@ void deleteList(List_Tfldf l) {
 	free(l);
 }
 
-void BubbleSortListRV(List_Tfldf ret) {
+void BubbleSortListRV__Tfldf(List_Tfldf ret) {
 	if (ret == NULL) {
 		//printf("NULL list");
 		return;
@@ -182,7 +182,7 @@ void BubbleSortListRV(List_Tfldf ret) {
 		}
 	}
 }
-void BubbleSortListTFIDF(List_Tfldf ret) {
+void BubbleSortListTFIDF__Tfldf(List_Tfldf ret) {
 	if (ret == NULL) {
 		//printf("NULL list");
 		return;
@@ -222,7 +222,7 @@ void BubbleSortListTFIDF(List_Tfldf ret) {
 		}
 	}
 }
-List_Tfldf mergeList(List_Tfldf l1, List_Tfldf l2) {
+List_Tfldf mergeList__Tfldf(List_Tfldf l1, List_Tfldf l2) {
 	l2->curr = l2->head;
 	while (l2->curr != NULL) {
 		l1->curr = l1->head;
@@ -236,10 +236,10 @@ List_Tfldf mergeList(List_Tfldf l1, List_Tfldf l2) {
 			l1->curr = l1->curr->next;
 		}
 		if (inside == 0 && l1->size <= 30) {
-			insertList(l2->curr->url, l1);
+			insertList__Tfldf(l2->curr->url, l1);
 		}
 		l2->curr = l2->curr->next;
 	}
-	deleteList(l2);
+	deleteList__Tfldf(l2);
 	return l1;
 }

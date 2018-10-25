@@ -7,13 +7,13 @@
 #include "posix.h"
 
 
-void stringToLower(char *str) {
+void stringToLower_Part2(char *str) {
 	char* s;
 	for (s = str; *s; ++s) *s = *s >= 'A'&&*s <= 'Z' ? *s | 0x60 : *s;
 }
 //Author Fabio Cabral
 //https://stackoverflow.com/questions/5457608/how-to-remove-the-character-at-a-given-index-from-a-string-in-c
-void removeNonLetters(char *str) {
+void removeNonLetters_Part2(char *str) {
 	char *src, *dst;
 	for (src = dst = str; *src; src++) {
 		*dst = *src;
@@ -24,19 +24,9 @@ void removeNonLetters(char *str) {
 	}
 	*dst = '\0';
 }
-char* normalise(const char * str) {
+char* normalise_Part2(const char * str) {
 	char* p = nStrdup(str);
-	stringToLower(p);
-	removeNonLetters(p);
+	stringToLower_Part2(p);
+	removeNonLetters_Part2(p);
 	return p;
-}
-int numOfWordsinFile() {
-	int i = 0;
-	FILE* fp = fopen("invertedIndex.txt", "r");
-	char str[1000];
-	//get the first line
-	while (fgets(str, 1000, fp) != NULL) {
-		i++;
-	}
-	return i;
 }
