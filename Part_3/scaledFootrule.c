@@ -6,36 +6,60 @@
 
 float scaledFootRuleCalc(int c, int t, int p, int n);
 //int biggestT = 0;
-void perm(int v[], int n, int i, List * lists, List unionL, int ts);
+void perm(int v[], int n, int i, List * lists, List unionL, int ts, int* result);
 List listFromFile(char* file);
+void copyArray(int *src, int*dest, int length);
 float min = 0;
 //
 
+
 int main(int argc, char* argv[]) {
 	List listUnion = listFromFile(argv[1]);
+	int bigT = listUnion->size;
 	List * tList = malloc(sizeof(List) * (argc - 1));
 	tList[0] = copy(listUnion);
 	
 	int i;
 	for (i = 2; i < argc; i++) {
 		List temp = listFromFile(argv[i]);
+		if (temp->size > bigT) bigT = temp->size;
 		tList[i - 1] = copy(temp);
 		mergeList(listUnion, temp); //Frees temp
 	}	
-	int * p = malloc(sizeof(int) * listUnion->size);
-	//Set the permutations of the list
+	int * p = malloc(sizeof(int) * bigT);
+	int* result = malloc(sizeof(int) * listUnion->size);
 	for (i = 0; i < listUnion->size; i++) {
+		result[i] = i + 1;
+	}
+	//Set the permutations of the list
+	for (i = 0; i < bigT; i++) {
 		p[i] = i + 1;
 	}
 	//int v[5];
 	//for (int i = 0; i<5; i++) v[i] = i + 1;
-	min = (argc - 1) * listUnion->size; // Imposible to have a sum higher than this
-	//(Assumes all list we send in is union size big, which is the "worst assumtion")
+	min = (argc - 1) * bigT; // Imposible to have a sum higher than this
+	//(Assumes all list we send in has same size and is the biggest, which is the "worst assumtion")
 
-	perm(p, listUnion->size, 0, tList, listUnion, argc-1);
+	perm(p, bigT, 0, tList, listUnion, argc-1, result);
 
-	printf("THE MIN IS:  %.6f ", min);
 
+	printf("%.6f\n", min);
+	for (i = 0; i < listUnion->size; i++) {
+		listUnion->curr = listUnion->head;
+		while (listUnion->curr != NULL) {
+			if (listUnion->curr->pos == result[i] - 1) {
+				printf("%s\n", listUnion->curr->url);
+			}
+			listUnion->curr = listUnion->curr->next;
+		}
+
+	}
+	for (i = 0; i < argc-1; i++) {
+		deleteList(tList[i]);
+	}
+	deleteList(listUnion);
+	free(p);
+	free(result);
 	char q;
 	q = getchar();
 	putchar(q);
@@ -43,7 +67,6 @@ int main(int argc, char* argv[]) {
 }
 float scaledFootRuleCalc(int c, int t, int p, int n) {
 	//printf("t[c] = %d    t = %d    p = %d    n = %d\n", c, t, p, n);
-	//printf("ret: %.6f\n", ret);
 	return  fabs(((float)c / (float)t) - ((float)p / (float)n));
 }
 
@@ -58,8 +81,8 @@ void swap(int v[], int i, int j) {
 }
 
 /* recursive function to generate permutations */
-void perm(int v[], int n, int i, List * lists, List unionL, int ts) {
-
+void perm(int v[], int n, int i, List * lists, List unionL, int ts, int*result) {
+	int ret = malloc(sizeof(int) * n);
 	/* this function generates the permutations of the array
 	* from element i to element n-1
 	*/
@@ -73,8 +96,9 @@ void perm(int v[], int n, int i, List * lists, List unionL, int ts) {
 		float sum = 0;
 		//For each url in C
 		unionL->curr = unionL->head; 
-		//printf("\n\nNEW PERMETATION:\n\n");
 		/*
+		printf("\n\nNEW PERMETATION:\n\n");
+		
 		for (int z = 0; z < n; z++) {
 			printf("%d ", v[z]);
 		}
@@ -88,11 +112,12 @@ void perm(int v[], int n, int i, List * lists, List unionL, int ts) {
 				lists[j]->curr = lists[j]->head;
 				int p = 0; 
 					while (lists[j]->curr != NULL) {
+						if (j == 0) {
+							permute = v[p];
+						}
 						if (strcmp(unionL->curr->url, lists[j]->curr->url) == 0) {
-							if (j == 0) {
-								permute = v[p];
-							}
-							sum += scaledFootRuleCalc(lists[j]->curr->pos + 1, lists[j]->size, permute, n);
+
+							sum += scaledFootRuleCalc(lists[j]->curr->pos + 1, lists[j]->size, permute, unionL->size);
 							break;
 						}
 						p++;
@@ -103,9 +128,8 @@ void perm(int v[], int n, int i, List * lists, List unionL, int ts) {
 		}
 		
 		if (sum < min) {
-
 			min = sum;
-
+			copyArray(v, result, n);
 		}
 
 		/*
@@ -137,7 +161,7 @@ void perm(int v[], int n, int i, List * lists, List unionL, int ts) {
 			/* try the array with i and j switched */
 
 			swap(v, i, j);
-			perm(v, n, i + 1, lists, unionL, ts);
+			perm(v, n, i + 1, lists, unionL, ts, result);
 
 			/* swap them back the way they were */
 
@@ -161,4 +185,10 @@ List listFromFile(char* file) {
 		insertList(str, list);
 	}
 	return list;
+}
+void copyArray(int* src, int* dest, int length) {
+	int i;
+	for (i = 0; i < length; i++) {
+		dest[i] = src[i];
+	}
 }
