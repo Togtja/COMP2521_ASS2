@@ -4,7 +4,7 @@
 #include "readData.h"
 #include "invertedIndex.h"
 #include "pagerank.h"
-
+/*
 int main(int argc, char* argv[]) {
 
 
@@ -33,3 +33,4 @@ int main(int argc, char* argv[]) {
 	putchar(k);
 	return 0;
 }
+*/
