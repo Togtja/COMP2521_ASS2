@@ -15,9 +15,13 @@ int wordAppear(List l, char * word);
 int main(int argc, char* argv[]) {
 
 	List bigBoy = fileToList(argv[1]);
-	int i;
+	if (bigBoy == NULL) {
+        return 0;
+    }
+    int i;
 	for (i = 2; i < argc; i++) {
 		List list = fileToList(argv[i]);
+//        printList(list);
 		mergeList(bigBoy, list);
 	}
 	List urls = numOfDocumets();
@@ -27,6 +31,7 @@ int main(int argc, char* argv[]) {
 
 		int j;
 		for ( j = 1; j < argc; j++) {
+//            printf("%s\n", bigBoy->curr->url);
 			//struct node * currtmp = bigBoy->curr;
 			float IDF = log10f( (float)urls->size / (float)wordAppear(urls, argv[j]));
 			//printf("IDF: %.7f \t bigboy %d \t size %d ", IDF, bigBoy->size, wordAppear(bigBoy, v[j]));

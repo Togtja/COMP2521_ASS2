@@ -40,13 +40,19 @@ List fileToList(char* find) {
 	List list = newList();
 	//get the first line
 	while (fgets(str, 1000, fp) != NULL) {
-		char* word = strstr(str, find);
+//	    printf("%s\n", str);
+        char* word = strstr(str, find);
 		//if the word we are looking for isn't in the line,
 		if (word == NULL) {
 			//go to the next line
 			continue;
 		}
 		//We have found the word
+        //assert we havent only found part of bigger word
+        //eg search 'man' and found 'human'
+        if (strcmp(word, str) != 0) {
+            continue;
+        }
 		char* url1 = strstr(word, " ");
 		//url1 points 2 the beginning of all the urls
 		url1 = strstr(&url1[1], " "); //there is 2 space after the words
@@ -66,7 +72,7 @@ List fileToList(char* find) {
 		fclose(fp);
 		return list;
 	}
-	printf("Could not find the word");
+	//printf("Could not find the word");
 	return NULL;
 }
 int numOfWordsinFile() {
