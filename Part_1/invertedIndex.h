@@ -12,5 +12,5 @@ char* normalise(const char * str);
 //Set the PR values from a file
 void PRList(List list);
 //Makes a file into a list
-List fileToList(char* find);
+List fileToList_Part2(char* find);
 #endif

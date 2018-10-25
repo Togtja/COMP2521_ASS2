@@ -102,7 +102,7 @@ void listOfUrls__Tfldf(char file[], List_Tfldf l){
 //List getInvertedList(List urls) {
 	//Don't understand what this one is suppsed to do
 //}
-void add__Tfldf(List_Tfldf l,struct node_Tfldf * newN) {
+void add_Tfldf(List_Tfldf l,struct node_Tfldf * newN) {
 	if (l->head == NULL) {
 		l->head = newN;
 	}
@@ -126,7 +126,7 @@ List_Tfldf copy__Tfldf(List_Tfldf l) {
 		newN->rankVal= l->curr->rankVal;
 		newN->url = nStrdup(l->curr->url);
 		l->curr = l->curr->next;
-		add__Tfldf(cpy, newN);
+		add_Tfldf(cpy, newN);
 	}
 	return cpy;
 }

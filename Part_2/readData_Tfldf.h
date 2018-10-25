@@ -42,5 +42,5 @@ void BubbleSortListRV__Tfldf(List_Tfldf ret);
 void BubbleSortListTFIDF__Tfldf(List_Tfldf ret);
 //merges two list and frees the second agrument/list
 List_Tfldf mergeList__Tfldf(List_Tfldf l1, List_Tfldf l2);
-List_Tfldf fileToList(char* find);
+List_Tfldf fileToList_Part2(char* find);
 #endif

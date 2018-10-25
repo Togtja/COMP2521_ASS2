@@ -97,7 +97,7 @@ void PRList(List list) {
 	}
 	fclose(fp);
 }
-List fileToList(char* find) {
+List fileToList_Part2(char* find) {
 
 	FILE* fp = fopen("invertedIndex.txt", "r");
 	char str[1000];

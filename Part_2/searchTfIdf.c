@@ -14,13 +14,13 @@ int wordAppear(List_Tfldf l, char * word);
 
 int main(int argc, char* argv[]) {
 
-	List_Tfldf bigBoy = fileToList(argv[1]);
+	List_Tfldf bigBoy = fileToList_Part2(argv[1]);
 	if (bigBoy == NULL) {
         return 0;
     }
     int i;
 	for (i = 2; i < argc; i++) {
-		List_Tfldf list = fileToList(argv[i]);
+		List_Tfldf list = fileToList_Part2(argv[i]);
 //        printList(list);
 		mergeList__Tfldf(bigBoy, list);
 	}
@@ -114,7 +114,7 @@ int wordAppear(List_Tfldf l, char * word) {
 	}
 	return i;
 }
-List_Tfldf fileToList(char* find) {
+List_Tfldf fileToList_Part2(char* find) {
 
 	FILE* fp = fopen("invertedIndex.txt", "r");
 	if (fp == NULL) {
