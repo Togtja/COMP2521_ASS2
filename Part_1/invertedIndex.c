@@ -125,6 +125,7 @@ List fileToList(char* find) {
 			insertList(theUrl, list);//insert the url into a new list
 			url1 = url2;//url1 point to the beginning of the next url
 			url2 = strstr(&url2[1], " ");//url2 point to the end of the next url
+			free(theUrl);
 		}
 		fclose(fp);
 		return list;

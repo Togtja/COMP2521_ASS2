@@ -20,8 +20,9 @@ void printList(List l) {
 
     l->curr = l->head;
     while (l->curr != NULL) {
-		printf("%s: weight: %d ins: %d outs: %d value: %.7f\n", l->curr->url, l->curr->pos, l->curr->in, l->curr->out, l->curr->val);
-		printf("Ranked Value: %d\n", l->curr->rankVal);
+		//printf("%s: weight: %d ins: %d outs: %d value: %.7f\n", l->curr->url, l->curr->pos, l->curr->in, l->curr->out, l->curr->val);
+		//printf("Ranked Value: %d\n", l->curr->rankVal);
+		printf("%s\n", l->curr->url);
 		l->curr = l->curr->next;
     }
 }
@@ -115,13 +116,14 @@ void graphBuilder(List urls, Graph g) {
 	//Create an empty list
 	//Get first element of the list
 	//While list is not empt
-    struct node *cur = urls->head;
-    addVertex(cur->url, g->vertex, g->nV);
+    urls->curr = urls->head;
+    addVertex(urls->curr->url, g->vertex, g->nV);
+	g->nV++;
 
-    while (cur != NULL && nVertices(g) <= urls->size) {
+    while (urls->curr != NULL && nVertices(g) <= urls->size) {
 
-        char *url_name = malloc(strlen(cur->url) + strlen(".txt") + 1);
-        strcpy(url_name, cur->url);
+        char *url_name = malloc(strlen(urls->curr->url) + strlen(".txt") + 1);
+        strcpy(url_name, urls->curr->url);
         strcat(url_name, ".txt");
 
         FILE *fp = fopen(url_name, "r");
@@ -130,7 +132,7 @@ void graphBuilder(List urls, Graph g) {
             printf("Could not fine file: %s\n", url_name);
 			fclose(fp);
 			free(url_name);
-			cur = cur->next;
+			urls->curr = urls->curr->next;
 			continue;
         }
         //later gator
@@ -146,9 +148,9 @@ void graphBuilder(List urls, Graph g) {
                 break;
             }
 
-            if(!isConnected(g, cur->url, str) && strcmp(cur->url, str) != 0) {
-                addEdge(g, cur->url, str);
-                cur->out++;
+            if(!isConnected(g, urls->curr->url, str) && strcmp(urls->curr->url, str) != 0) {
+                addEdge(g, urls->curr->url, str);
+				urls->curr->out++;
                 struct node *finder = urls->head;
                 while (strcmp(finder->url, str) != 0) {
                     finder = finder->next;
@@ -161,8 +163,7 @@ void graphBuilder(List urls, Graph g) {
         fclose(fp);
         free(url_name);
 
-        cur = cur->next;
-
+		urls->curr = urls->curr->next;
     }
 		//Read the url
 		//Update graph by adding node and outgoinf links
@@ -207,8 +208,8 @@ List copy(List l) {
 		add(cpy, newN);
 	}
 	//THIS IS BAD
-	cpy->graph = l->graph;
-
+	//cpy->graph = l->graph;
+	l->curr = l->head;
 	return cpy;
 }
 
@@ -222,8 +223,9 @@ void deleteList(List l) {
 	}
 	//free(l->curr->url);
 	//free(l->curr);
-    if (l->graph != NULL)
+	if (l->graph != NULL) {
         disposeGraph(l->graph);
+	}
 	free(l);
 }
 void BubbleSortListPR(List ret) {

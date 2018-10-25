@@ -1,6 +1,5 @@
 // graph.c ... Graph of strings (adjacency matrix)
 // Written by John Shepherd, September 2015
-
 #include <stdlib.h>
 #include <stdio.h>
 #include <assert.h>
@@ -66,7 +65,9 @@ void disposeGraph(Graph g)
 	for (i = 0; i < g->maxV; i++) {
 		free(g->edges[i]);
 	}
+	free(g->vertex);
 	free(g->edges);
+	free(g);
 }
 
 // addEdge(Graph,Src,Dest)
@@ -161,6 +162,7 @@ int vertexID(char *str, char **names, int N)
 // - add Str at end of Names
 int addVertex(char *str, char **names, int N)
 {
-	names[N] = nStrdup(str);
+	//strcpy(names[N], str);
+	names[N] = nStrdup(str); //THIS IS CAUSING MEMORY TROBLES
 	return N;
 }

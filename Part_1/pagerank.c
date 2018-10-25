@@ -1,14 +1,15 @@
+
 #include <stdlib.h>
 #include <stdio.h>
 #include <string.h>
 #include "readData.h"
-#include "queue.h"
 #include "graph.h"
 #include "pagerank.h"
 #include <math.h>
 #include "BSTree.h"
 #include "invertedIndex.h"
 #include "posix.h"
+
 
 void pageRankCalc(List l, double damp, double diffPR, int it);
 float W_in(List l, struct node * src, struct node *p1);
@@ -20,15 +21,14 @@ int main(int argc, char *argv[]) {
     double diffPR = atof(argv[2]);
     int maxIterations = atoi(argv[3]);
 
-    printf("%lf, %lf, %d\n", d, diffPR, maxIterations);
+    //printf("%lf, %lf, %d\n", d, diffPR, maxIterations);
 
     //build list of urls
     List url_list = newList();
     listOfUrls("collection", url_list);
+	
 	initPR(url_list);
-	printf("\nLIST LIST:\n\n");
-	printList(url_list);
-
+	
     //build a list of the page ranks of each url
     //and set them all to 1/N, N being num of urls
 
@@ -36,36 +36,32 @@ int main(int argc, char *argv[]) {
     //build a graph representation of the connections
     //between urls
 	url_list->graph = newGraph(url_list->size);
+	
     graphBuilder(url_list, url_list->graph);
-	printf("\nCALCULATED LIST:\n\n");
+
+
 	pageRankCalc(url_list, d, diffPR, maxIterations);
-    printList(url_list);
 
+	
 	BubbleSortListPR(url_list);
-	printf("\nSORTED LIST:\n\n");
-	printList(url_list);
+
 	printListToFile(url_list, "pagerankList.txt");
-
-	printf("\nBSTree:\n\n");
 	BSTree BST = newBSTree();
-	invIndexBuilder(url_list, BST);
+	invIndexBuilder(url_list, BST); //BSTree freed inside here
+	dropBSTree(BST);
+	
     deleteList(url_list);
-    dropBSTree(BST);
-
-	deleteList(url_list);
-	disposeGraph(BST);
-
-	char c = getchar();
-	putchar(c);
+	printf("FINSHIED\n");
     return 0;
 }
 void pageRankCalc(List l, double damp, double diffPR, int it) {
 	int i = 0; double diff = diffPR; l->curr = l->head;
-	List temp = copy(l);
 
-	temp->curr = temp->head;
-
+	
 	for (i = 0; i < it && diff >= diffPR; i++) {
+		List temp = copy(l);
+		l->curr = l->head;
+		temp->curr = temp->head;
 		while (l->curr != NULL) {
 			float sum = 0;
 			for (temp->curr = temp->head; temp->curr != NULL; temp->curr = temp->curr->next) {
@@ -85,12 +81,10 @@ void pageRankCalc(List l, double damp, double diffPR, int it) {
 			diff = sum1;
 			l->curr = l->curr->next;
 		}
-		free(temp);
-		temp = copy(l);
-		l->curr = l->head;
-		temp->curr = temp->head;
+		//l->curr = l->head;
+		deleteList(temp);
+
 	}
-	free(temp);
 }
 
 float W_in(List l, struct node * src, struct node *p1) {
