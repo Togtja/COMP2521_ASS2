@@ -5,23 +5,22 @@
 #include "readData.h"
 
 float scaledFootRuleCalc(int c, int t, int p, int n);
-//int biggestT = 0;
 void perm(int v[], int n, int i, List * lists, List unionL, int ts, int* result);
 List listFromFile(char* file);
 void copyArray(int *src, int*dest, int length);
 float min = 0;
-//
-
 
 int main(int argc, char* argv[]) {
 	List listUnion = listFromFile(argv[1]);
-	int bigT = listUnion->size;
+	
+	//Somehow this lose 16 bytes of memory
 	List * tList = malloc(sizeof(List) * (argc - 1));
 	tList[0] = copy(listUnion);
-	
+	int bigT = tList[0]->size;//set list 0 to be the biggest list (for now) 
 	int i;
 	for (i = 2; i < argc; i++) {
 		List temp = listFromFile(argv[i]);
+		//if find bigger list, then set that as biggest list
 		if (temp->size > bigT) bigT = temp->size;
 		tList[i - 1] = copy(temp);
 		mergeList(listUnion, temp); //Frees temp
@@ -55,14 +54,12 @@ int main(int argc, char* argv[]) {
 
 	}
 	deleteList(listUnion);
+	//I though this was correctly freeing the memory?
 	for (i = 0; i < argc-1; i++) {
 		deleteList(tList[i]);
 	}
 	free(p);
 	free(result);
-	char q;
-	q = getchar();
-	putchar(q);
 	return 0;
 }
 float scaledFootRuleCalc(int c, int t, int p, int n) {
@@ -70,7 +67,7 @@ float scaledFootRuleCalc(int c, int t, int p, int n) {
 	return  fabs(((float)c / (float)t) - ((float)p / (float)n));
 }
 
-/* function to swap array elements */
+//function to swap array elements
 
 void swap(int v[], int i, int j) {
 	int	t;
@@ -80,17 +77,9 @@ void swap(int v[], int i, int j) {
 	v[j] = t;
 }
 
-/* recursive function to generate permutations */
+//recursive function to generate permutations
 void perm(int v[], int n, int i, List * lists, List unionL, int ts, int*result) {
-	/* this function generates the permutations of the array
-	* from element i to element n-1
-	*/
 	int	j;
-
-	/* if we are at the end of the array, we have one permutation
-	* we can use (here we print it; you could as easily hand the
-	* array off to some other function that uses it for something
-	*/
 	if (i == n) {
 		float sum = 0;
 		//For each url in C
@@ -130,48 +119,14 @@ void perm(int v[], int n, int i, List * lists, List unionL, int ts, int*result) 
 			min = sum;
 			copyArray(v, result, n);
 		}
-
-		/*
-		int a;
-		for (a = 0; a < ts; a++) {
-
-			int tSize = lists[a]->size;
-
-			int k;
-			for (k = 0; k < tSize; k++) {
-				int biggestT = n;
-				sum += scaledFootRuleCalc(k + 1, tSize, v[k], biggestT);
-			}
-		}
-		//printf("sum: %.6f\n", sum);
-		if (sum < min) {
-
-			min = sum;
-
-		}
-		//printf("\n");*/
 	}
 	else
-		/* recursively explore the permutations starting
-		* at index i going through index n-1
-		*/
 		for (j = i; j < n; j++) {
-
-			/* try the array with i and j switched */
-
 			swap(v, i, j);
 			perm(v, n, i + 1, lists, unionL, ts, result);
-
-			/* swap them back the way they were */
-
 			swap(v, i, j);
 		}
 }
-int factorial(int a) {
-	if (a == 1) return 1;
-	return a * factorial(a - 1);
-}
-
 List listFromFile(char* file) {
 	List list= newList();
 	FILE* fp = fopen(file, "r");

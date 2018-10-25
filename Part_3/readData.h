@@ -7,8 +7,6 @@ struct node {
     char * url;
     struct node *next;
     int pos;
-	float TfIdfValue;
-	int rankVal;
 };
 
 struct List {
@@ -35,11 +33,7 @@ void listOfUrls(char file[], List l);
 //Copies lists
 List copy(List l);
 //deltes list
-void deleteList(List l);;
-//Bubble sort the Rank Values
-void BubbleSortListRV(List ret);
-//Bubble sort the TFIDF values
-void BubbleSortListTFIDF(List ret);
+void deleteList(List l);
 //merges two list and frees the second agrument/list
 List mergeList(List l1, List l2);
 #endif

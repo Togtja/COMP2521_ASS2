@@ -16,7 +16,7 @@ void printList(List l) {
 
     l->curr = l->head;
     while (l->curr != NULL) {
-		printf("%s  %.6f\n", l->curr->url, l->curr->TfIdfValue);
+		printf("%s", l->curr->url);
 		l->curr = l->curr->next;
     }
 }
@@ -54,8 +54,6 @@ void insertList(char str[], List L) {
         L->head = link;
         L->curr = L->head;
         L->head->pos = 0;
-		L->head->TfIdfValue = 0;
-		L->head->rankVal = 0;
     } else {
 		L->curr = L->head;
 		while (L->curr->next != NULL) {
@@ -64,8 +62,6 @@ void insertList(char str[], List L) {
         L->curr->next = link;
         L->curr = L->curr->next;
         L->curr->pos = L->size;
-		L->curr->TfIdfValue= 0;
-		L->curr->rankVal = 0;
     }
 
     L->size++;
@@ -122,8 +118,6 @@ List copy(List l) {
 		struct node *newN = malloc(sizeof(struct node));
 		newN->next = NULL;//Will set to correct next in add
 		newN->pos = l->curr->pos;
-		newN->TfIdfValue = l->curr->TfIdfValue;
-		newN->rankVal= l->curr->rankVal;
 		newN->url = nStrdup(l->curr->url);
 		l->curr = l->curr->next;
 		add(cpy, newN);
@@ -132,6 +126,9 @@ List copy(List l) {
 }
 
 void deleteList(List l) {
+	if (l == NULL) {
+		return;
+	}
 	l->curr = l->head; 
 	while (l->curr != NULL) {
 		struct node* remv = l->curr;
@@ -141,87 +138,6 @@ void deleteList(List l) {
 	}
 	free(l);
 }
-
-void BubbleSortListRV(List ret) {
-	if (ret == NULL) {
-		printf("NULL list");
-		return;
-	}
-	if (ret->size == 1) {
-		printf("List is 1");
-		return;
-	}
-	struct node * prv = NULL;
-	struct node * cmp1 = ret->head;
-	struct node * cmp2 = ret->head->next;
-	int c;
-	for (c = 0; c < ret->size * ret->size; c++) {
-		if (cmp1->rankVal < cmp2->rankVal) {
-			cmp1->next = cmp2->next;
-			cmp2->next = cmp1;
-			int ind = cmp1->pos;
-			cmp1->pos = cmp2->pos;
-			cmp2->pos = ind;
-			if (prv == NULL) { ret->head = cmp2; }
-			else {
-				prv->next = cmp2;
-			}
-
-			prv = cmp2;
-			cmp2 = cmp1->next;
-		}
-		else {
-			prv = cmp1;
-			cmp1 = cmp2;
-			cmp2 = cmp2->next;
-		}
-		if (cmp2 == NULL) {
-			prv = NULL;
-			cmp1 = ret->head;
-			cmp2 = ret->head->next;
-		}
-	}
-}
-void BubbleSortListTFIDF(List ret) {
-	if (ret == NULL) {
-		printf("NULL list");
-		return;
-	}
-	if (ret->size == 1) {
-		printf("List is 1");
-		return;
-	}
-	struct node * prv = NULL;
-	struct node * cmp1 = ret->head;
-	struct node * cmp2 = ret->head->next;
-	int c;
-	for (c = 0; c < ret->size * ret->size; c++) {
-		if (cmp1->TfIdfValue < cmp2->TfIdfValue) {
-			cmp1->next = cmp2->next;
-			cmp2->next = cmp1;
-			int ind = cmp1->pos;
-			cmp1->pos = cmp2->pos;
-			cmp2->pos = ind;
-			if (prv == NULL) { ret->head = cmp2; }
-			else {
-				prv->next = cmp2;
-			}
-
-			prv = cmp2;
-			cmp2 = cmp1->next;
-		}
-		else {
-			prv = cmp1;
-			cmp1 = cmp2;
-			cmp2 = cmp2->next;
-		}
-		if (cmp2 == NULL) {
-			prv = NULL;
-			cmp1 = ret->head;
-			cmp2 = ret->head->next;
-		}
-	}
-}
 List mergeList(List l1, List l2) {
 	l2->curr = l2->head;
 	while (l2->curr != NULL) {
@@ -229,7 +145,6 @@ List mergeList(List l1, List l2) {
 		int inside = 0;
 		while (l1->curr != NULL) {
 			if (strcmp(l1->curr->url, l2->curr->url) == 0) {
-				l1->curr->rankVal++;
 				inside = 1;
 				break;
 			}
