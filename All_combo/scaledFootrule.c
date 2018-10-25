@@ -61,6 +61,7 @@ int main(int argc, char* argv[]) {
 	for (i = 0; i < argc-1; i++) {
 		deleteList_SFR(tList[i]);
 	}
+    free(tList);
 	free(p);
 	free(result);
 	return 0;
