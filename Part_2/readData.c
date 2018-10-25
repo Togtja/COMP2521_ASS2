@@ -132,7 +132,7 @@ List copy(List l) {
 }
 
 void deleteList(List l) {
-	l->head = l->curr;
+	l->curr = l->head;
 	while (l->curr != NULL) {
 		struct node* remv = l->curr;
 		l->curr = l->curr->next;

@@ -43,6 +43,8 @@ int main(int argc, char* argv[]) {
 	printList(bigBoy);
 	char q = getchar();
 	putchar(q);
+    deleteList(urls);
+    deleteList(bigBoy);
     return EXIT_SUCCESS;
 }
 float TFsearchUrl(char* url, char* word) {
@@ -66,6 +68,7 @@ float TFsearchUrl(char* url, char* word) {
 		}
 		if (strstr(str, "Section-2")) {
 			s2flag++;
+		    free(cmp);
 			continue;
 		}
 		if (s2flag == 4) {
@@ -79,6 +82,7 @@ float TFsearchUrl(char* url, char* word) {
 	}
 
 	fclose(fp);
+    free(filename);
 	if (numTotal == 0) {
 		return 0;
 	}
