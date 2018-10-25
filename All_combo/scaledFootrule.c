@@ -4,9 +4,13 @@
 #include <string.h>
 #include "readData_SFR.h"
 
+//basic algo in function for readability
 float scaledFootRuleCalc(int c, int t, int p, int n);
+//permutes (bruteforces) and returns the minimum
 float perm(int v[], int n, int i, List_SFR * lists, List_SFR unionL, int ts, int* result, float min);
+//get list from file
 List_SFR listFromFile(char* file);
+//copy an array
 void copyArray(int *src, int*dest, int length);
 
 int main(int argc, char* argv[]) {

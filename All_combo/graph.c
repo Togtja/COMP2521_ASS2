@@ -1,4 +1,5 @@
 // graph.c ... Graph of strings (adjacency matrix)
+//used lab implementation, THANKS FOR WRITING JAS
 // Written by John Shepherd, September 2015
 #include <stdlib.h>
 #include <stdio.h>

@@ -47,6 +47,10 @@ void deleteList(List l);
 void BubbleSortListPR(List ret);
 //Bubble sort the Rank Values
 void BubbleSortListRV(List ret);
+//sort the list by strcmp the urls
+//used for outputting urls in
+//Part 2
+void BubbleSortListSC(List ret);
 //prints a list to a file
 void printListToFile(List l, char* fileName);
 //merges two list and frees the second agrument/list

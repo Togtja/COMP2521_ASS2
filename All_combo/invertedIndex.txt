@@ -1,58 +1,58 @@
-and  url11 
-apparent  url11 
-ascribed  url11 url21 
-attributed  url11 url21 
-been  url11 
-changes  url11 url21 
-circle  url22 url23 
-color  url11 url21 
-cycles  url31 
-design  url11 url21 
-early  url11 
-eu  url34 
-experiments  url34 
-features  url11 url21 
-has  url11 
-high  url23 
-human  url11 
-intelligent  url11 url21 
-interest  url11 
-japan  url34 
-jupiter  url34 
-jupitor  url23 
-landing  url32 
-light  url23 url31 
-linear  url11 url21 
-long  url11 
-man  url32 
-mars  url11 url21 url22 url23 url32 url34 
-moon  url22 url23 url31 url32 url34 
-moons  url23 
-nasa  url34 
-observations  url11 
-of  url11 
-on  url11 
-planet  url32 url34 
-planets  url34 
-pluto  url22 url23 
-promise  url32 
-rays  url23 url31 
-red  url32 
-revealed  url11 url21 
-robot  url34 
-robotics  url32 
-seasonal  url11 url21 url22 
-small  url23 
-subject  url11 
-sun  url22 url23 url31 url32 
-surface  url11 url21 
-telescopic  url11 
-that  url11 
-the  url11 
-to  url11 url21 
-vegetation  url11 url21 
-volcano  url23 url31 url32 url34 
-waves  url23 
-weather  url31 url32 url34 
-were  url11 url21 
-winds  url22 url23 
+and  url10 url11 url12 url13 
+apparent  url10 url11 url12 url13 
+ascribed  url10 url11 url12 url13 url14 url15 url20 url21 
+attributed  url10 url11 url12 url13 url14 url15 url20 url21 
+been  url10 url11 url12 url13 
+changes  url10 url11 url12 url13 url14 url15 url20 url21 
+circle  url16 url22 url23 url24 url25 url26 url36 url40 url56 url60 
+color  url10 url11 url12 url13 url14 url15 url20 url21 
+cycles  url30 url31 url41 url42 url50 url51 url61 url62 
+design  url10 url11 url12 url13 url14 url15 url20 url21 
+early  url10 url11 url12 url13 
+eu  url34 url35 url45 url46 url53 url55 url65 url66 
+experiments  url34 url35 url45 url46 url53 url55 url65 url66 
+features  url10 url11 url12 url13 url14 url15 url20 url21 
+has  url10 url11 url12 url13 
+high  url23 url25 url26 url40 url60 
+human  url10 url11 url12 url13 
+intelligent  url10 url11 url12 url13 url14 url15 url20 url21 
+interest  url10 url11 url12 url13 
+japan  url34 url35 url45 url46 url53 url55 url65 url66 
+jupiter  url34 url35 url45 url46 url53 url55 url65 url66 
+jupitor  url23 url25 url26 url40 url60 
+landing  url32 url33 url43 url44 url52 url54 url63 url64 
+light  url23 url25 url26 url30 url31 url40 url41 url42 url50 url51 url60 url61 url62 
+linear  url10 url11 url12 url13 url14 url15 url20 url21 
+long  url10 url11 url12 url13 
+man  url32 url33 url43 url44 url52 url54 url63 url64 
+mars  url10 url11 url12 url13 url14 url15 url16 url20 url21 url22 url23 url24 url25 url26 url32 url33 url34 url35 url36 url40 url43 url44 url45 url46 url52 url53 url54 url55 url56 url60 url63 url64 url65 url66 
+moon  url16 url22 url23 url24 url25 url26 url30 url31 url32 url33 url34 url35 url36 url40 url41 url42 url43 url44 url45 url46 url50 url51 url52 url53 url54 url55 url56 url60 url61 url62 url63 url64 url65 url66 
+moons  url23 url25 url26 url40 url60 
+nasa  url34 url35 url45 url46 url53 url55 url65 url66 
+observations  url10 url11 url12 url13 
+of  url10 url11 url12 url13 
+on  url10 url11 url12 url13 
+planet  url32 url33 url34 url35 url43 url44 url45 url46 url52 url53 url54 url55 url63 url64 url65 url66 
+planets  url34 url35 url45 url46 url53 url55 url65 url66 
+pluto  url16 url22 url23 url24 url25 url26 url36 url40 url56 url60 
+promise  url32 url33 url43 url44 url52 url54 url63 url64 
+rays  url23 url25 url26 url30 url31 url40 url41 url42 url50 url51 url60 url61 url62 
+red  url32 url33 url43 url44 url52 url54 url63 url64 
+revealed  url10 url11 url12 url13 url14 url15 url20 url21 
+robot  url34 url35 url45 url46 url53 url55 url65 url66 
+robotics  url32 url33 url43 url44 url52 url54 url63 url64 
+seasonal  url10 url11 url12 url13 url14 url15 url16 url20 url21 url22 url24 url36 url56 
+small  url23 url25 url26 url40 url60 
+subject  url10 url11 url12 url13 
+sun  url16 url22 url23 url24 url25 url26 url30 url31 url32 url33 url36 url40 url41 url42 url43 url44 url50 url51 url52 url54 url56 url60 url61 url62 url63 url64 
+surface  url10 url11 url12 url13 url14 url15 url20 url21 
+telescopic  url10 url11 url12 url13 
+that  url10 url11 url12 url13 
+the  url10 url11 url12 url13 
+to  url10 url11 url12 url13 url14 url15 url20 url21 
+vegetation  url10 url11 url12 url13 url14 url15 url20 url21 
+volcano  url23 url25 url26 url30 url31 url32 url33 url34 url35 url40 url41 url42 url43 url44 url45 url46 url50 url51 url52 url53 url54 url55 url60 url61 url62 url63 url64 url65 url66 
+waves  url23 url25 url26 url40 url60 
+weather  url30 url31 url32 url33 url34 url35 url41 url42 url43 url44 url45 url46 url50 url51 url52 url53 url54 url55 url61 url62 url63 url64 url65 url66 
+were  url10 url11 url12 url13 url14 url15 url20 url21 
+winds  url16 url22 url23 url24 url25 url26 url36 url40 url56 url60 

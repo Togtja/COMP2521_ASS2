@@ -8,17 +8,19 @@
 #include "posix.h"
 
 int main() {
-
+    //read in urls
     List url_list = newList();
     listOfUrls("collection", url_list);
 
+    //create BSTree and dump results into .txt file
     BSTree BST = newBSTree();
 	invIndexBuilder(url_list, BST); //BSTree freed inside here
 	dropBSTree(BST);
 
     deleteList(url_list);
 
-    return 0;
+    printf("Completed!\n");
+    return EXIT_SUCCESS;
 
 }
 

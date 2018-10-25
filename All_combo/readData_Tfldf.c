@@ -4,6 +4,8 @@
 #include "readData_Tfldf.h"
 #include "posix.h"
 
+//readData modified for TFIDF
+
 List_Tfldf newList_Tfldf() {
     List_Tfldf list = malloc(sizeof(struct List_Tfldf));
     list->head = NULL;
@@ -15,7 +17,7 @@ List_Tfldf newList_Tfldf() {
 void printList_Tfldf(List_Tfldf l) {
 
 	l->curr = l->head; int i = 0;
-    while (l->curr != NULL && i <= 30) {
+    while (l->curr != NULL && i < 30) {
 		printf("%s  %.6f\n", l->curr->url, l->curr->TfIdfValue);
 		l->curr = l->curr->next; i++;
     }

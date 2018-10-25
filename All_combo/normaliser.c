@@ -6,7 +6,10 @@
 #include "normaliser.h"
 #include "posix.h"
 
-
+//DEJA VU
+//had to split files for delivery
+//refer to invertedIndex.c for explanations
+//and comments for these functions
 void stringToLower_Part2(char *str) {
 	char* s;
 	for (s = str; *s; ++s) *s = *s >= 'A'&&*s <= 'Z' ? *s | 0x60 : *s;

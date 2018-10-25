@@ -4,6 +4,9 @@
 #include "readData_SFR.h"
 #include "posix.h"
 
+//readData modified for scaled footrule
+//calculations
+
 List_SFR newList_SFR() {
     List_SFR list = malloc(sizeof(struct List_SFR));
     list->head = NULL;
@@ -129,7 +132,7 @@ void deleteList_SFR(List_SFR l) {
 	if (l == NULL) {
 		return;
 	}
-	l->curr = l->head; 
+	l->curr = l->head;
 	while (l->curr != NULL) {
 		struct node_SFR* remv = l->curr;
 		l->curr = l->curr->next;

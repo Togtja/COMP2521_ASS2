@@ -5,7 +5,8 @@
 #include "graph.h"
 #include "posix.h"
 
-void BubbleSortListSC(List ret);
+//comments in the header
+
 List newList() {
     List list = malloc(sizeof(struct List));
     list->head = NULL;
@@ -18,9 +19,7 @@ List newList() {
 void printList(List l) {
 
 	l->curr = l->head; int i = 0;
-    while (l->curr != NULL && i <= 30) {
-		//printf("%s: weight: %d ins: %d outs: %d value: %.7f\n", l->curr->url, l->curr->pos, l->curr->in, l->curr->out, l->curr->val);
-		//printf("Ranked Value: %d\n", l->curr->rankVal);
+    while (l->curr != NULL && i < 30) {
 		printf("%s\n", l->curr->url);
 		l->curr = l->curr->next; i++;
     }
@@ -163,14 +162,8 @@ void graphBuilder(List urls, Graph g) {
         free(url_name);
 
 		urls->curr = urls->curr->next;
-    }
-		//Read the url
-		//Update graph by adding node and outgoinf links
-	//End while
-}
-//List getInvertedList(List urls) {
-	//Don't understand what this one is suppsed to do
-//}
+    }}
+
 void initPR(List l) {
 	l->curr = l->head;
 	while (l->curr != NULL) {
@@ -206,8 +199,6 @@ List copy(List l) {
 		l->curr = l->curr->next;
 		add(cpy, newN);
 	}
-	//THIS IS BAD
-	//cpy->graph = l->graph;
 	l->curr = l->head;
 	return cpy;
 }
@@ -220,8 +211,6 @@ void deleteList(List l) {
 		free(remv->url);
 		free(remv);
 	}
-	//free(l->curr->url);
-	//free(l->curr);
 	if (l->graph != NULL) {
         disposeGraph(l->graph);
 	}

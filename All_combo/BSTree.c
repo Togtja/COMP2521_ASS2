@@ -1,4 +1,6 @@
 // BSTree.c ... implementation of binary search tree ADT
+//Vaguely based on implementation from labs, changed
+//to reflect our needs and culled unnecessary functions
 #include <stdlib.h>
 #include <stdio.h>
 #include <assert.h>
@@ -43,6 +45,7 @@ void dropBSTree(BSTree t) {
 	free(t);
 }
 
+
 BSTree BSTInsert(BSTree t, char *url, char* keyword){
     if (t == NULL) {
         t = newBSTNode(keyword);
@@ -85,6 +88,7 @@ void showBSTree(BSTree t)
 
 }
 
+//write to function
 void writeBSTree(BSTree t, FILE *fp)
 {
 	if (t == NULL)

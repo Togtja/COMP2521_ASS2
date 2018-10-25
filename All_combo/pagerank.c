@@ -9,8 +9,10 @@
 #include "invertedIndex.h"
 #include "posix.h"
 
-
+//calculates PR by iterating through each url, gathering connections
+//and accumulating a sum, using external functions for w_in and w_out
 void pageRankCalc(List l, double damp, double diffPR, int it);
+
 float W_in(List l, struct node * src, struct node *p1);
 float W_out(List l, struct node * src, struct node *p1);
 
@@ -26,10 +28,10 @@ int main(int argc, char *argv[]) {
     List url_list = newList();
     listOfUrls("collection", url_list);
 
-	initPR(url_list);
-
     //build a list of the page ranks of each url
     //and set them all to 1/N, N being num of urls
+	initPR(url_list);
+
 
 
     //build a graph representation of the connections
@@ -38,14 +40,16 @@ int main(int argc, char *argv[]) {
 
     graphBuilder(url_list, url_list->graph);
 
-
+    //calc
 	pageRankCalc(url_list, d, diffPR, maxIterations);
 
-
+    //sort list by ascending PR
 	BubbleSortListPR(url_list);
 
+    //output!
 	printListToFile(url_list, "pagerankList.txt");
-	printf("FINSHIED\n");
+	deleteList(url_list);
+    printf("FINSHIED\n");
     return 0;
 }
 void pageRankCalc(List l, double damp, double diffPR, int it) {

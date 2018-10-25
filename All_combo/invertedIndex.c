@@ -7,8 +7,10 @@
 #include "invertedIndex.h"
 #include "posix.h"
 
+//Build BSTree and dump it to txt
 void invIndexBuilder (List l, BSTree t) {
     struct node *curr = l->head;
+    //open file
     while (curr != NULL) {
         char * filename = malloc(strlen(curr->url) + strlen(".txt") + 1);
 		strcpy(filename, curr->url);
@@ -20,9 +22,10 @@ void invIndexBuilder (List l, BSTree t) {
             free(filename);
 			return;
         }
-        //come back later and FIX
         char str[100];
         int s2flag = 0;
+        //make sure we are only scanning in words, not urls
+        //or #Sections etc.
         while(fscanf(fp, "%s", str) != EOF) {
             if (strstr(str, "#start") || strstr(str, "#end")) {
                 s2flag++;
@@ -34,12 +37,14 @@ void invIndexBuilder (List l, BSTree t) {
             if (s2flag == 4) {
                 char *str_to_insert = normalise(str);
                 t = BSTInsert(t,curr->url, str_to_insert);
+                free(str_to_insert);
             }
         }
         fclose(fp);
         free(filename);
         curr = curr->next;
     }
+    //open and dump txt
 	FILE* fp = fopen("invertedIndex.txt", "w");
 	if (fp == NULL) {
 		printf("you suck");
@@ -49,10 +54,13 @@ void invIndexBuilder (List l, BSTree t) {
     dropBSTree(t);
 	fclose(fp);
 }
+//lower chars
 void stringToLower(char *str) {
 	char* s;
 	for (s = str; *s; ++s) *s = *s >= 'A'&&*s <= 'Z' ? *s | 0x60 : *s;
 }
+
+//based our function on below source:
 //Author Fabio Cabral
 //https://stackoverflow.com/questions/5457608/how-to-remove-the-character-at-a-given-index-from-a-string-in-c
 void removeNonLetters(char *str) {
@@ -66,12 +74,15 @@ void removeNonLetters(char *str) {
 	}
 	*dst = '\0';
 }
+
 char* normalise(const char * str) {
 	char* p = nStrdup(str);
 	stringToLower(p);
 	removeNonLetters(p);
 	return p;
 }
+//read PR values from the pageranklist.txt
+//and update them in our BST list
 void PRList(List list) {
 	FILE* fp = fopen("pagerankList.txt", "r");
 	char str3[100];
