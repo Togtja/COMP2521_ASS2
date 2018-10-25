@@ -54,10 +54,10 @@ int main(int argc, char* argv[]) {
 		}
 
 	}
+	deleteList(listUnion);
 	for (i = 0; i < argc-1; i++) {
 		deleteList(tList[i]);
 	}
-	deleteList(listUnion);
 	free(p);
 	free(result);
 	char q;
@@ -82,7 +82,6 @@ void swap(int v[], int i, int j) {
 
 /* recursive function to generate permutations */
 void perm(int v[], int n, int i, List * lists, List unionL, int ts, int*result) {
-	int ret = malloc(sizeof(int) * n);
 	/* this function generates the permutations of the array
 	* from element i to element n-1
 	*/
@@ -177,13 +176,14 @@ List listFromFile(char* file) {
 	List list= newList();
 	FILE* fp = fopen(file, "r");
 	if (fp == NULL) {
-		printf("FAILED TO OPEN FILE %d\n", file);
+		printf("FAILED TO OPEN FILE %s\n", file);
 		exit(-1);
 	}
 	char str[100];
 	while (fscanf(fp, "%s", str) != EOF) {
 		insertList(str, list);
 	}
+	fclose(fp);
 	return list;
 }
 void copyArray(int* src, int* dest, int length) {
