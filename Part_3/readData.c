@@ -120,7 +120,7 @@ List copy(List l) {
 	l->curr = l->head;
 	while (l->curr != NULL) {
 		struct node *newN = malloc(sizeof(struct node));
-		newN->next = NULL;
+		newN->next = NULL;//Will set to correct next in add
 		newN->pos = l->curr->pos;
 		newN->TfIdfValue = l->curr->TfIdfValue;
 		newN->rankVal= l->curr->rankVal;
@@ -132,7 +132,7 @@ List copy(List l) {
 }
 
 void deleteList(List l) {
-	l->head = l->curr;
+	l->curr = l->head; 
 	while (l->curr != NULL) {
 		struct node* remv = l->curr;
 		l->curr = l->curr->next;
