@@ -1,18 +1,18 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <string.h>
-#include "readData.h"
+#include "readData_Tfldf.h"
 #include "posix.h"
 
-List newList() {
-    List list = malloc(sizeof(struct List));
+List_Tfldf newList() {
+    List_Tfldf list = malloc(sizeof(struct List_Tfldf));
     list->head = NULL;
     list->curr = NULL;
     list->size = 0;
     return list;
 }
 
-void printList(List l) {
+void printList(List_Tfldf l) {
 
     l->curr = l->head;
     while (l->curr != NULL) {
@@ -21,9 +21,9 @@ void printList(List l) {
     }
 }
 
-void printOnlyUrls(List L) {
+void printOnlyUrls(List_Tfldf L) {
 
-    struct node *ptr = L->head;
+    struct node_Tfldf *ptr = L->head;
     while (ptr != NULL) {
         printf("%s ", ptr->url);
         ptr = ptr->next;
@@ -32,9 +32,9 @@ void printOnlyUrls(List L) {
 
 }
 
-void fprintOnlyUrls(List L, FILE *fp) {
+void fprintOnlyUrls(List_Tfldf L, FILE *fp) {
 
-    struct node *ptr = L->head;
+    struct node_Tfldf *ptr = L->head;
     while (ptr != NULL) {
         fprintf(fp, "%s ", ptr->url);
         ptr = ptr->next;
@@ -45,8 +45,8 @@ void fprintOnlyUrls(List L, FILE *fp) {
 
 
 
-void insertList(char str[], List L) {
-    struct node *link = malloc(sizeof(struct node));
+void insertList(char str[], List_Tfldf L) {
+    struct node_Tfldf *link = malloc(sizeof(struct node_Tfldf));
     link->url = malloc(strlen(str) * sizeof(char) + 1);
     strcpy(link->url, str);
     link->next = NULL;
@@ -71,7 +71,7 @@ void insertList(char str[], List L) {
     L->size++;
 }
 
-void listOfUrls(char file[], List l){
+void listOfUrls(char file[], List_Tfldf l){
 	//Find the file
     char * filename = malloc(strlen(file) + strlen(".txt") + 1);
     strcpy(filename, file);
@@ -102,7 +102,7 @@ void listOfUrls(char file[], List l){
 //List getInvertedList(List urls) {
 	//Don't understand what this one is suppsed to do
 //}
-void add(List l,struct node * newN) {
+void add(List_Tfldf l,struct node_Tfldf * newN) {
 	if (l->head == NULL) {
 		l->head = newN;
 	}
@@ -115,11 +115,11 @@ void add(List l,struct node * newN) {
 	}
 	l->size++;
 }
-List copy(List l) {
-	List cpy = newList();
+List_Tfldf copy(List_Tfldf l) {
+	List_Tfldf cpy = newList();
 	l->curr = l->head;
 	while (l->curr != NULL) {
-		struct node *newN = malloc(sizeof(struct node));
+		struct node_Tfldf *newN = malloc(sizeof(struct node_Tfldf));
 		newN->next = NULL;
 		newN->pos = l->curr->pos;
 		newN->TfIdfValue = l->curr->TfIdfValue;
@@ -131,10 +131,10 @@ List copy(List l) {
 	return cpy;
 }
 
-void deleteList(List l) {
+void deleteList(List_Tfldf l) {
 	l->curr = l->head;
 	while (l->curr != NULL) {
-		struct node* remv = l->curr;
+		struct node_Tfldf* remv = l->curr;
 		l->curr = l->curr->next;
 		free(remv->url);
 		free(remv);
@@ -142,7 +142,7 @@ void deleteList(List l) {
 	free(l);
 }
 
-void BubbleSortListRV(List ret) {
+void BubbleSortListRV(List_Tfldf ret) {
 	if (ret == NULL) {
 		//printf("NULL list");
 		return;
@@ -151,9 +151,9 @@ void BubbleSortListRV(List ret) {
 		//printf("List is 1");
 		return;
 	}
-	struct node * prv = NULL;
-	struct node * cmp1 = ret->head;
-	struct node * cmp2 = ret->head->next;
+	struct node_Tfldf * prv = NULL;
+	struct node_Tfldf * cmp1 = ret->head;
+	struct node_Tfldf * cmp2 = ret->head->next;
 	int c;
 	for (c = 0; c < ret->size * ret->size; c++) {
 		if (cmp1->rankVal < cmp2->rankVal) {
@@ -182,7 +182,7 @@ void BubbleSortListRV(List ret) {
 		}
 	}
 }
-void BubbleSortListTFIDF(List ret) {
+void BubbleSortListTFIDF(List_Tfldf ret) {
 	if (ret == NULL) {
 		//printf("NULL list");
 		return;
@@ -191,9 +191,9 @@ void BubbleSortListTFIDF(List ret) {
 		//printf("List is 1");
 		return;
 	}
-	struct node * prv = NULL;
-	struct node * cmp1 = ret->head;
-	struct node * cmp2 = ret->head->next;
+	struct node_Tfldf * prv = NULL;
+	struct node_Tfldf * cmp1 = ret->head;
+	struct node_Tfldf * cmp2 = ret->head->next;
 	int c;
 	for (c = 0; c < ret->size * ret->size; c++) {
 		if (cmp1->TfIdfValue < cmp2->TfIdfValue) {
@@ -222,7 +222,7 @@ void BubbleSortListTFIDF(List ret) {
 		}
 	}
 }
-List mergeList(List l1, List l2) {
+List_Tfldf mergeList(List_Tfldf l1, List_Tfldf l2) {
 	l2->curr = l2->head;
 	while (l2->curr != NULL) {
 		l1->curr = l1->head;

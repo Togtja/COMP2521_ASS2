@@ -2,7 +2,6 @@
 #include <stdio.h>
 #include <string.h>
 #include "readData.h"
-#include "queue.h"
 #include "graph.h"
 #include "posix.h"
 

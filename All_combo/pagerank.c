@@ -4,8 +4,8 @@
 #include <string.h>
 #include "readData.h"
 #include "graph.h"
-#include "pagerank.h"
 #include <math.h>
+#include "BSTree.h"
 #include "invertedIndex.h"
 #include "posix.h"
 
@@ -45,6 +45,9 @@ int main(int argc, char *argv[]) {
 	BubbleSortListPR(url_list);
 
 	printListToFile(url_list, "pagerankList.txt");
+	BSTree BST = newBSTree();
+	invIndexBuilder(url_list, BST); //BSTree freed inside here
+	dropBSTree(BST);
 	
     deleteList(url_list);
 	printf("FINSHIED\n");

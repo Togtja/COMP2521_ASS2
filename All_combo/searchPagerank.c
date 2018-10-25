@@ -3,7 +3,6 @@
 #include <string.h>
 #include "readData.h"
 #include "invertedIndex.h"
-#include "pagerank.h"
 
 
 
