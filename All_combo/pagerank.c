@@ -25,9 +25,9 @@ int main(int argc, char *argv[]) {
     //build list of urls
     List url_list = newList();
     listOfUrls("collection", url_list);
-	
+
 	initPR(url_list);
-	
+
     //build a list of the page ranks of each url
     //and set them all to 1/N, N being num of urls
 
@@ -35,28 +35,23 @@ int main(int argc, char *argv[]) {
     //build a graph representation of the connections
     //between urls
 	url_list->graph = newGraph(url_list->size);
-	
+
     graphBuilder(url_list, url_list->graph);
 
 
 	pageRankCalc(url_list, d, diffPR, maxIterations);
 
-	
+
 	BubbleSortListPR(url_list);
 
 	printListToFile(url_list, "pagerankList.txt");
-	BSTree BST = newBSTree();
-	invIndexBuilder(url_list, BST); //BSTree freed inside here
-	dropBSTree(BST);
-	
-    deleteList(url_list);
 	printf("FINSHIED\n");
     return 0;
 }
 void pageRankCalc(List l, double damp, double diffPR, int it) {
 	int i = 0; double diff = diffPR; l->curr = l->head;
 
-	
+
 	for (i = 0; i < it && diff >= diffPR; i++) {
 		List temp = copy(l);
 		l->curr = l->head;
